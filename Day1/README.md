@@ -3,9 +3,14 @@
 ## Virtualization Overview
 
 ## Docker Overview
+
+## Docker - High Level Architecture
 ![Docker High Level Architecture](DockerHighLevelArchitecture.png)
 
 ## Red Hat OpenShift Overview
+
+
+## Red Hat OpenShift - High-Level Architecture
 ![OpenShift Architecture](openshift-architecture.png)
 ![OpenShift Architecture](openshift-architecture-2.png)
 
