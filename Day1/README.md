@@ -6,3 +6,5 @@
 ![Docker High Level Architecture](DockerHighLevelArchitecture.png)
 
 ## Red Hat OpenShift Overview
+![OpenShift Architecture](openshift-architecture.png)
+![OpenShift Architecture](openshift-architecture2.png)
