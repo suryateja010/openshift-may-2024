@@ -67,7 +67,7 @@
       - Storage
 
 ## Containerization
-- application virtualization technolgoy
+- application virtualization technology
 - each container represents one application process
 - container is not an Operating Sytem
 - container has one application and its dependent libraries
@@ -75,7 +75,10 @@
 - but containers get an IP Address
 - container has their own file system ( files & folders )
 - container has their own network stack with software defined network card
-
+- light-weight virtualization
+  - reason being, containers shares the hardwares on the underlying host operating systems
+  - containers also shares the host-os Kernel
+  - containers doesn't have their own kernel
 ## Virtualization vs Containerization
 
 
