@@ -85,6 +85,18 @@
 - Each Virtual Machines gets dedicated hardware resources while containers running on the same OS shares the hardware resources on the host OS
 - Each OS running on the Virtual Machine has its own Kernel, while containers don't have their own kernel, containers depends on Host OS kernel
 
+## Container vs Normal Application Process
+- Container is nothing but a regular application process but it runs in a separate namespace
+- containers 
+  - has its own network namespace
+  - has its Port namespace ( Port range - 0 to 65535 )
+
+## What is a Container Runtime?
+
+## What is a Container Engine?
+
+
+
 ## Docker Overview
 
 ## Docker - High Level Architecture
