@@ -36,7 +36,34 @@
   - Type 2 Hypervisors
     - they are installed on Laptops/Desktops/Workstation with some OS
     - they depend on Host OS ( Windows, Mac, Linux )
-      
+
+## Processor and Packaging
+- Processor has one or more CPU Cores
+- Processor are packaged in 2 forms
+  - SCM - Single Chip Module
+    - only one Processor will be in the IC
+  - MCM - Multiple chip Module
+    - 2/4/8 Processors can be package in a single IC
+- Examples
+  - One Processors supports - 128/256/512 CPU Cores
+  - MCM IC - let's take that it has 4 Processors in a single IC
+  - Let's assume, each Processor supports 128 CPU Cores
+  - Generally Server motherboards comes with multiple Processor Sockets ( 2/4/8 Socket Motherboards )
+  - Final assumption
+    - a server motherboard that supports 4 Sockets
+    - each Socket is installed with MCM with 4 Processors on each IC
+    - Processor - 128 CPU Cores
+    - Total CPU Core - 4 Sockets x 4 x 128 = 2048 CPU Cores
+    - Total logical cores - 2048 x 2 = 4096 virtual cores in a single server
+  - Hypertheading
+    - each Physical CPU double as 2/4/8 logical/virtual CPU Cores
+  - each Operating Systems runs in a separate Virtual Machine
+  - Virtual Machines are also referred as Guest OS
+  - Each Virtual Machines requires ( hence called heavy-weight virtualization )
+    - dedicated hardware resources
+      - CPU
+      - RAM
+      - Storage
 ## Virtualization vs Containerization
 
 ## Docker Overview
