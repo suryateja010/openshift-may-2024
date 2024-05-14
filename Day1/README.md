@@ -950,3 +950,15 @@ Events:
   Normal  Created         10m   kubelet            Created container nginx
   Normal  Started         10m   kubelet            Started container nginx  
 </pre>
+
+## Lab - Deleting a Pod
+```
+oc get pods
+oc delete pod nginx-bb865dc5f-45szb
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc delete pod nginx-bb865dc5f-45szb
+pod "nginx-bb865dc5f-45szb" deleted  
+</pre>
