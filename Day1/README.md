@@ -1350,6 +1350,12 @@ curl http://master-2.ocp4.tektutor.org.labs:31485
 curl http://master-3.ocp4.tektutor.org.labs:31485
 curl http://worker-1.ocp4.tektutor.org.labs:31485
 curl http://worker-2.ocp4.tektutor.org.labs:31485
+
+curl http://192.168.122.20:31485
+curl http://192.168.122.211:31485
+curl http://192.168.122.194:31485
+curl http://192.168.122.228:31485
+curl http://192.168.122.56:31485
 ```
 
 We don't need to worry in which node the Pod is running as the kube-proxy component running on each node does a forward if it find no pod matching the selector label.
