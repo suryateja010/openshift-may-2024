@@ -195,6 +195,8 @@ Examples
 - this is a paid software
 - comes with Red Hat support
 - Openshift 4.x supports only CRI-O Container Runtime and Podman Container Engine
+- AWS Managed OpenShift is called ROSA ( installing and managing openshift is taken care by AWS )
+- Azure Managed openshift is called ARO ( installing and managing openshift is taken care by Azure )
 
 ## Red Hat OpenShift - High-Level Architecture
 ![OpenShift Architecture](openshift-architecture.png)
