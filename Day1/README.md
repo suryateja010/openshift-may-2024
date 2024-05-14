@@ -91,13 +91,40 @@
   - has its own network namespace
   - has its Port namespace ( Port range - 0 to 65535 )
 
+## Linux Kernel Container Features
+1. Namespace
+   - helps in isolating one container from other containers running on the same OS
+      
+2. Control Group(CGroups)
+   - helps in applying resource quota restrictions like
+     - we can restrict a container on how many CPU Cores it can use at any point of time
+     - we can restrict how much RAM a container use at the max
+     - we can restrict, how much storage a container can use at the max
+
 ## What is a Container Runtime?
+- it is low-level software that manages container images and containers
+- it is not so user-friendly, hence end-user like us normally won't use Container Runtimes directly
+- Examples
+  - runC
+  - CRI-O
 
 ## What is a Container Engine?
-
-
+- it is high-level software
+- it is very user-friendly
+- internally it depends on Container Runtimes to manage container images and containers
+- Examples
+  - Docker is a Container Engine that depends on containerd which in turn depends on runC container runtime
+  - Podman is a Container Engine that depends on CRI-O container runtime
 
 ## Docker Overview
+- is a Container Engine
+- follows client/server architecure
+- the server component runs as a background service
+- server component runs in root user context, hence all containers gain admin privilege
+- is developed in Go language by Docker In organization
+- comes in 2 flavours
+  1. Docker Community Edition called Docker CE
+  2. Docker Enterprise Edition called Docker EE (requires license)
 
 ## Docker - High Level Architecture
 ![Docker High Level Architecture](DockerHighLevelArchitecture.png)
