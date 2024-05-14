@@ -1029,3 +1029,27 @@ The Deployment resource is managed by a controller called Deployment Controller.
 The ReplicaSet resource is managed by a controller called ReplicaSet Controller. The ReplicaSet Controller supports Scale up/down.
 
 When we deploy applications, we optionally can also mention how many instances of Pods are supposed to be running.  If we don't mention the pod count(replicas) then it assumes 1 Pod and it creates a single Pod.
+
+## Lab - Scale up nginx deployment from 1 Pod to 3 pods
+```
+oc scale deploy/nginx --replicas=3
+oc get deploy,rs,po
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc scale deploy/nginx --replicas=3
+deployment.apps/nginx scaled
+  
+[jegan@tektutor.org openshift-may-2024]$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   1/3     3            1           47m
+
+NAME                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-bb865dc5f   3         3         1       47m
+
+NAME                        READY   STATUS              RESTARTS   AGE
+pod/nginx-bb865dc5f-tdvpt   0/1     ContainerCreating   0          2s
+pod/nginx-bb865dc5f-vk9ld   0/1     ContainerCreating   0          2s
+pod/nginx-bb865dc5f-zkcm8   1/1     Running             0          30m
+</pre>
