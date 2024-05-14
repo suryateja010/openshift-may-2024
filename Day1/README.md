@@ -7,4 +7,4 @@
 
 ## Red Hat OpenShift Overview
 ![OpenShift Architecture](openshift-architecture.png)
-![OpenShift Architecture](openshift-architecture2.png)
+![OpenShift Architecture](openshift-architecture-2.png)
