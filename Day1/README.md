@@ -1053,3 +1053,32 @@ pod/nginx-bb865dc5f-tdvpt   0/1     ContainerCreating   0          2s
 pod/nginx-bb865dc5f-vk9ld   0/1     ContainerCreating   0          2s
 pod/nginx-bb865dc5f-zkcm8   1/1     Running             0          30m
 </pre>
+
+## Lab - Scale down manually
+```
+oc get deploy,rs,po
+oc scale deploy/nginx --replicas=1
+oc get po -w
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   3/3     3            3           79m
+
+NAME                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-bb865dc5f   3         3         3       79m
+
+NAME                        READY   STATUS    RESTARTS   AGE
+pod/nginx-bb865dc5f-tdvpt   1/1     Running   0          31m
+pod/nginx-bb865dc5f-vk9ld   1/1     Running   0          31m
+pod/nginx-bb865dc5f-zkcm8   1/1     Running   0          61m
+  
+[jegan@tektutor.org openshift-may-2024]$ oc scale deploy/nginx --replicas=1
+deployment.apps/nginx scaled
+  
+[jegan@tektutor.org openshift-may-2024]$ oc get po -w
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-bb865dc5f-zkcm8   1/1     Running   0          61m  
+</pre>
