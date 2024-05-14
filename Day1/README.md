@@ -1082,3 +1082,55 @@ deployment.apps/nginx scaled
 NAME                    READY   STATUS    RESTARTS   AGE
 nginx-bb865dc5f-zkcm8   1/1     Running   0          61m  
 </pre>
+
+
+## Lab - Getting inside a pod shell
+```
+oc get po
+oc exec -it nginx-bb865dc5f-zkcm8 sh
+ls
+hostname
+hostname -i
+exit
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc exec -it nginx-bb865dc5f-zkcm8 sh
+kubectl exec [POD] [COMMAND] is DEPRECATED and will be removed in a future version. Use kubectl exec [POD] -- [COMMAND] instead.
+$ ls
+50x.html  index.html
+$ hostname -i
+10.131.0.250
+$ hostname
+nginx-bb865dc5f-zkcm8
+$ exit  
+</pre>
+
+Alternatively, we could also get inside any one of the Pod that is part of nginx deployment as shown below
+```
+oc get po
+oc rsh deploy/nginx
+ls
+hostname
+hostname -i
+exit
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get po
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-bb865dc5f-thqfz   1/1     Running   0          6s
+nginx-bb865dc5f-vdbwh   1/1     Running   0          6s
+nginx-bb865dc5f-zkcm8   1/1     Running   0          64m
+  
+[jegan@tektutor.org openshift-may-2024]$ oc rsh deploy/nginx
+$ ls
+50x.html  index.html
+$ hostname
+nginx-bb865dc5f-zkcm8
+$ hostname -i
+10.131.0.250
+$ exit  
+</pre>
