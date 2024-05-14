@@ -176,6 +176,12 @@ Examples
 - it doesn't support Web Interface, supports only CLI
 - supports extending Kubernetes API by adding new Custom Resource Definitions (CRD) to add your own Custom Resources (CR)s
 
+## What is Kubernetes/OpenShift Operator
+- it is a combition of Custom Resource & Custom Controller
+- Kuberntes & Openshift support many different Controllers
+- Controller are the one which supports monitoring
+- Each Controller manages(monitors) one type of Resource
+
 ## Red Hat OpenShift Overview
 - this Red Hat's distribution of Kubernetes
 - Red Hat OpenShift is developed on top of Google Kubernetes
