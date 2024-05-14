@@ -1186,6 +1186,43 @@ exit
 
 Expected output
 ```
+[jegan@tektutor.org ~]$ oc get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+hello   1/1     1            1           16m
+nginx   5/5     5            5           139m
+
+[jegan@tektutor.org ~]$ oc expose deploy/nginx --type=ClusterIP --port=8080
+service/nginx exposed
+
+[jegan@tektutor.org ~]$ oc get services
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.250.37   <none>        8080/TCP   3s
+
+[jegan@tektutor.org ~]$ oc get service
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.250.37   <none>        8080/TCP   5s
+
+[jegan@tektutor.org ~]$ oc get svc
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.250.37   <none>        8080/TCP   7s
+
+[jegan@tektutor.org ~]$ oc describe svc/nginx
+Name:              nginx
+Namespace:         jegan
+Labels:            app=nginx
+Annotations:       <none>
+Selector:          app=nginx
+Type:              ClusterIP
+IP Family Policy:  SingleStack
+IP Families:       IPv4
+IP:                172.30.250.37
+IPs:               172.30.250.37
+Port:              <unset>  8080/TCP
+TargetPort:        8080/TCP
+Endpoints:         10.128.0.182:8080,10.128.2.251:8080,10.129.0.66:8080 + 2 more...
+Session Affinity:  None
+Events:            <none>
+
 [jegan@tektutor.org ~]$ oc rsh deploy/test
 Error from server (NotFound): deployments.apps "test" not found
 [jegan@tektutor.org ~]$ oc rsh deploy/hello
@@ -1213,6 +1250,7 @@ Commercial support is available at
 <p><em>Thank you for using nginx.</em></p>
 </body>
 </html>
+
 sh-4.4$ curl http://172.30.247.147:8080
 <!DOCTYPE html>
 <html>
