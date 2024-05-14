@@ -846,3 +846,15 @@ NAME                    READY   STATUS              RESTARTS   AGE
 nginx-bb865dc5f-45szb   0/1     ContainerCreating   0          12s
 nginx-bb865dc5f-45szb   1/1     Running             0          13s 
 </pre>
+
+## Lab - Finding IP address of a Pod and in which node is runing
+```
+oc get po -o wide
+```
+
+Expectd output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get po -o wide
+NAME                    READY   STATUS    RESTARTS   AGE     IP             NODE                              NOMINATED NODE   READINESS GATES
+nginx-bb865dc5f-45szb   1/1     Running   0          7m58s   10.128.2.238   worker-1.ocp4.tektutor.org.labs   <none>           <none>  
+</pre>
