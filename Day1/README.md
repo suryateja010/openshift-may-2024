@@ -1136,6 +1136,9 @@ $ exit
 </pre>
 
 ## Lab - Port Forwarding ( strictly used for the developer testing purpose only )
+
+We should avoid this in production.
+
 ```
 oc get pods
 oc port-forward pod/nginx-bb865dc5f-nvb5h 8080:8080
