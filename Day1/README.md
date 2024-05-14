@@ -681,3 +681,19 @@ Expected output
 [jegan@tektutor.org openshift-may-2024]$ <b>oc project</b>
 Using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".  
 </pre>
+
+## Lab - Deploying your first application into Red Hat OpenShift
+In the below command, replace 'jegan' with your project name
+```
+oc project jegan
+oc create deployment nginx --image=nginx:latest
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ <b>oc project jegan</b>
+Now using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".
+  
+[jegan@tektutor.org openshift-may-2024]$ <b>oc create deployment nginx --image=nginx:latest</b>
+deployment.apps/nginx created  
+</pre>
