@@ -670,3 +670,14 @@ Now using project "default" on server "https://api.ocp4.tektutor.org.labs:6443".
 [jegan@tektutor.org openshift-may-2024]$ <b>oc project jegan</b>
 Now using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".  
 </pre>
+
+## Lab - Finding the current active project
+```
+oc project
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ <b>oc project</b>
+Using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".  
+</pre>
