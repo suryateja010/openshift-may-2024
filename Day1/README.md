@@ -1158,3 +1158,76 @@ curl localhost:7080
 ```
 
 In the above 7080 is the port we opened on our local machine, while 8080 is the port nginx web server is listing within the Pod container.
+
+## Info - Kubernetes/Openshift Service
+- Service represents a group of Pods that belongs to a specific deployment
+- Services are 3 types
+  1. ClusterIP - Internal service ( supports in-built load-balancing )
+  2. NodePOrt - External service ( supports in-built load-balancing)
+  3. LoadBalancer - External service ( this is meant to be used in public cloud like AWS/Azure - supports ELB/ALB in AWS/Azure) 
+
+## Lab - Creating an internal ClusterIP Service for nginx deployment
+```
+oc get deploy
+oc expose deploy/nginx --type=ClusterIP --port=8080
+oc get services
+oc get service
+oc get svc
+oc describe svc/nginx
+```
+
+Expected output
+```
+[jegan@tektutor.org ~]$ oc rsh deploy/test
+Error from server (NotFound): deployments.apps "test" not found
+[jegan@tektutor.org ~]$ oc rsh deploy/hello
+sh-4.4$ curl http://nginx:8080
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+sh-4.4$ curl http://172.30.247.147:8080
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+sh-4.4$   
+```
