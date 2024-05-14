@@ -79,8 +79,11 @@
   - reason being, containers shares the hardwares on the underlying host operating systems
   - containers also shares the host-os Kernel
   - containers doesn't have their own kernel
-## Virtualization vs Containerization
 
+## Virtualization vs Containerization
+- Each Virtual Machine represents an OS while each Container represents a single application
+- Each Virtual Machines gets dedicated hardware resources while containers running on the same OS shares the hardware resources on the host OS
+- Each OS running on the Virtual Machine has its own Kernel, while containers don't have their own kernel, containers depends on Host OS kernel
 
 ## Docker Overview
 
