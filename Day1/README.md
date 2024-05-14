@@ -225,4 +225,30 @@ Examples
 - Services
 - EndPoint
 
+## Lab - Checking the Openshift client version
+```
+oc version
+```
 
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc version
+Client Version: 4.14.12
+Kustomize Version: v5.0.1
+Server Version: 4.14.20
+Kubernetes Version: v1.27.11+ec42b99  
+</pre>
+
+Kubernetes client version
+```
+kubectl version
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ kubectl version
+WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
+Client Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.4", GitCommit:"286cfa5f978c4a89c776347c82fa09a232eef144", GitTreeState:"clean", BuildDate:"2024-01-29T22:50:23Z", GoVersion:"go1.20.12 X:strictfipsruntime", Compiler:"gc", Platform:"linux/amd64"}
+Kustomize Version: v5.0.1
+Server Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.11+ec42b99", GitCommit:"9654661a61cc44110a8a3a801a82482ab63d063d", GitTreeState:"clean", BuildDate:"2024-04-04T12:53:37Z", GoVersion:"go1.20.12 X:strictfipsruntime", Compiler:"gc", Platform:"linux/amd64"}  
+</pre>
