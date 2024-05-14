@@ -225,6 +225,62 @@ Examples
 - Services
 - EndPoint
 
+## What are the Kubernetes Control Plane Components?
+Kubernetes/OpenShift supports 4 Control Plan Components
+1. API Server
+2. etcd key/value datastore/database
+3. scheduler
+4. controller managers ( collection of many controllers )
+
+The control plane components runs only in the master nodes.
+
+#### API Server
+- supports REST API for all the features supported by OpenShift
+- all the Openshift components will be communicated only to API Server
+- other components are not allowed to communicate with each other
+- API Server maintains the nodes, cluster, application status in the etcd database
+- only API Server will have access to etcd database
+- In our openshift cluster 3 master nodes are there, hence 3 API Servers i.e one API Server per master node is there
+- API Server sends broadcasting events whenever any update happens in the API Server
+  - new record added
+  - existing record updated
+  - existing record deleted
+  
+#### etcd database
+- opensource database that can used outside the scope of Kubernetes/openshift as well
+- it stores key/values as records
+- since we have 3 master nodes, there are 3 etcd databases which works as a cluster
+
+#### Scheduler
+- this is the component which is responsible to find a healthy node where a new Pod can be deployed
+- Scheduler sends its scheduling recommendataion to API Server
+- API Server updates the scheduling info on each Pod stored in the etcd database
+- API Server broadcasts events for each Pod deployed onto some node
+- Kubelet is the container agent that runs in every node ( master and worker nodes)
+- kubelet downloads the container image, creates and starts the container
+- kubelet keeps monitoring the status of the container running on the local node and reports the status on a heart-beat like periodic fashion to the API Server
+
+#### Controller Managers
+- it is a collection of many controller
+- Examples
+  - Deployment Controller
+  - ReplicaSet Controller
+  - EndPoitnt Controller
+  - Job Controller
+  - StatefulSet Controller
+  - DaemonSet Controller
+- Each Controller manages one type of Kubernetes/OpenShift resource
+- For example
+  - Deployment Controller manages Deployment resource
+- Deployment Controller watches for events related to Deployment Resource
+  - New deployment created
+  - Depoyment edited
+  - Deployment deleted
+- ReplicaSet Controller watches for events from API Server related to ReplicaSet Resource
+  - New ReplicaSet created
+  - ReplicaSet edited
+  - ReplicaSet deleted
+  
 ## Lab - Checking the Openshift client version
 ```
 oc version
@@ -962,3 +1018,14 @@ Expected output
 [jegan@tektutor.org openshift-may-2024]$ oc delete pod nginx-bb865dc5f-45szb
 pod "nginx-bb865dc5f-45szb" deleted  
 </pre>
+
+When we deploy an application into Kubernetes/Openshift the following resources are created
+1. Deployment
+2. ReplicaSet
+3. Pod
+
+The Deployment resource is managed by a controller called Deployment Controller. The Deployment Controller supports Rolling update.
+
+The ReplicaSet resource is managed by a controller called ReplicaSet Controller. The ReplicaSet Controller supports Scale up/down.
+
+When we deploy applications, we optionally can also mention how many instances of Pods are supposed to be running.  If we don't mention the pod count(replicas) then it assumes 1 Pod and it creates a single Pod.
