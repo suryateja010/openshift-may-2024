@@ -467,6 +467,8 @@ apiserver-7dbf8d7788-9zkmb   2/2     Running   24         28d   10.129.0.45   ma
 apiserver-7dbf8d7788-lndws   2/2     Running   24         28d   10.130.0.48   master-3.ocp4.tektutor.org.labs   <none>          <none></pre>
 
 ## Lab - List all the projects/namespaces in Openshift
+In Openshift, applications are deployed in a separate project.  Each team, will create their own project to deplooy their applications.
+
 ```
 oc get projects
 oc get namespaces
@@ -631,4 +633,25 @@ openshift-service-ca                               Active   28d
 openshift-service-ca-operator                      Active   28d
 openshift-user-workload-monitoring                 Active   28d
 openshift-vsphere-infra                            Active   28d  
+</pre>
+
+## Lab - Creating a new project
+I would recommend each one of you creating a project in your name.  Normally this is not recommended best practice at work place, but in our training to avoid conflicts please use your name. Replace 'jegan' with your name.
+
+```
+oc new-project jegan
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc new-project jegan
+Now using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.43 -- /agnhost serve-hostname  
 </pre>
