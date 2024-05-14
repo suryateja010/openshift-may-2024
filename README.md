@@ -36,3 +36,4 @@ The pre-test URL is kept open on the lab machine web browser for your convenienc
 #### Note 
 - Kindly use your personal email-id for pre-test registration (avoid using BOFA id)
 - Copy/Paste between your machine and lab machine is disabled as per your Bank policy
+- Once you are done with your pre-test, leave a message via chat or let me know in case you don't have chat access
