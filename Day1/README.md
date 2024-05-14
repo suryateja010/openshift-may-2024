@@ -809,3 +809,40 @@ deployment.apps "nginx" deleted
 [jegan@tektutor.org openshift-may-2024]$ oc get deploy,rs,po
 No resources found in jegan namespace.  
 </pre>
+
+## Lab - Deploying nginx web server with bitnami nginx image from Docker Hub Remote Registry
+```
+oc project
+oc get all
+oc create deploy nginx --image=bitnami/nginx:latest
+oc get deploy,rs,po
+oc get po -w
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc project
+Using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".
+  
+[jegan@tektutor.org openshift-may-2024]$ oc get all
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+No resources found in jegan namespace
+  
+[jegan@tektutor.org openshift-may-2024]$ oc create deploy nginx --image=bitnami/nginx:latest
+deployment.apps/nginx create
+  
+[jegan@tektutor.org openshift-may-2024]$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   0/1     1            0           4s
+
+NAME                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-bb865dc5f   1         1         0       4s
+
+NAME                        READY   STATUS              RESTARTS   AGE
+pod/nginx-bb865dc5f-45szb   0/1     ContainerCreating   0          4
+  
+[jegan@tektutor.org openshift-may-2024]$ oc get po -w
+NAME                    READY   STATUS              RESTARTS   AGE
+nginx-bb865dc5f-45szb   0/1     ContainerCreating   0          12s
+nginx-bb865dc5f-45szb   1/1     Running             0          13s 
+</pre>
