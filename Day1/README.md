@@ -409,3 +409,19 @@ Allocated resources:
   hugepages-2Mi      0 (0%)        0 (0%)
 Events:              <none>  
 </pre>
+
+## Lab - Finding IP address, Node OS and Container Runtime details
+```
+oc get nodes -o wide
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org <b>openshift-may-2024]$ oc get nodes -o wide</b>
+NAME                              STATUS   ROLES                         AGE   VERSION            INTERNAL-IP       EXTERNAL-IP   OS-IMAGE                                                       KERNEL-VERSION                 CONTAINER-RUNTIME
+master-1.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d   192.168.122.20    <none>        Red Hat Enterprise Linux CoreOS 414.92.202403270157-0 (Plow)   5.14.0-284.59.1.el9_2.x86_64   cri-o://1.27.4-6.1.rhaos4.14.gitd09e4c0.el9
+master-2.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d   192.168.122.211   <none>        Red Hat Enterprise Linux CoreOS 414.92.202403270157-0 (Plow)   5.14.0-284.59.1.el9_2.x86_64   cri-o://1.27.4-6.1.rhaos4.14.gitd09e4c0.el9
+master-3.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d   192.168.122.194   <none>        Red Hat Enterprise Linux CoreOS 414.92.202403270157-0 (Plow)   5.14.0-284.59.1.el9_2.x86_64   cri-o://1.27.4-6.1.rhaos4.14.gitd09e4c0.el9
+worker-1.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d   192.168.122.228   <none>        Red Hat Enterprise Linux CoreOS 414.92.202403270157-0 (Plow)   5.14.0-284.59.1.el9_2.x86_64   cri-o://1.27.4-6.1.rhaos4.14.gitd09e4c0.el9
+worker-2.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d   192.168.122.56    <none>        Red Hat Enterprise Linux CoreOS 414.92.202403270157-0 (Plow)   5.14.0-284.59.1.el9_2.x86_64   cri-o://1.27.4-6.1.rhaos4.14.gitd09e4c0.el9
+</pre>
