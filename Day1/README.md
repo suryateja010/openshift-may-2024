@@ -1134,3 +1134,24 @@ $ hostname -i
 10.131.0.250
 $ exit  
 </pre>
+
+## Lab - Port Forwarding ( strictly used for the developer testing purpose only )
+```
+oc get pods
+oc port-forward pod/nginx-bb865dc5f-nvb5h 8080:8080
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org ~]$ oc port-forward pod/nginx-bb865dc5f-nvb5h 7080:8080
+Forwarding from 127.0.0.1:7080 -> 8080
+Forwarding from [::1]:7080 -> 8080
+Handling connection for 7080  
+</pre>
+
+On a different terminal, you can access the nginx web page as shown below
+```
+curl localhost:7080
+```
+
+In the above 7080 is the port we opened on our local machine, while 8080 is the port nginx web server is listing within the Pod container.
