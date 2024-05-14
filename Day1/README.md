@@ -1181,6 +1181,7 @@ oc get services
 oc get service
 oc get svc
 oc describe svc/nginx
+exit
 ```
 
 Expected output
