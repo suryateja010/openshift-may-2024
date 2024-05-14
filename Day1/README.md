@@ -1432,3 +1432,8 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+## First day training feedback
+```
+https://survey.zohopublic.com/zs/ixCOuX
+```
