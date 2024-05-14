@@ -784,7 +784,8 @@ nginx: [emerg] mkdir() "/var/cache/nginx/client_temp" failed (13: Permission den
 
 In our Openshift cluster, in all the nodes we have installed Red Hat Enterprise Core OS (RHCOS). The Red Hat Enterprise Core OS enforces many best practices.  
 
-One of the best practices it enforces is, 
+Some of the best practices it enforces is, 
 - user application ie nginx in this case are not supposed to be running in root user context.
 - RHCOS also maintains certains folders as read-only
 - In this case /var folder is write protected for normal user applications, hence RHCOS is denying permission to create folder under the /var directory.
+- it reservers ports below 1024 for internal use, hence user-applications are not supposed to be using ports below 1024.
