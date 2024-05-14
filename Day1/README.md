@@ -789,3 +789,23 @@ Some of the best practices it enforces is,
 - RHCOS also maintains certains folders as read-only
 - In this case /var folder is write protected for normal user applications, hence RHCOS is denying permission to create folder under the /var directory.
 - it reservers ports below 1024 for internal use, hence user-applications are not supposed to be using ports below 1024.
+
+## Lab - Deleting an application deployment
+```
+oc get deployments
+oc delete deploy/nginx
+oc get deploy,rs,po
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/1     1            0           18m
+  
+[jegan@tektutor.org openshift-may-2024]$ oc delete deploy/nginx
+deployment.apps "nginx" deleted
+  
+[jegan@tektutor.org openshift-may-2024]$ oc get deploy,rs,po
+No resources found in jegan namespace.  
+</pre>
