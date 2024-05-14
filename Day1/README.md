@@ -858,3 +858,15 @@ Expectd output
 NAME                    READY   STATUS    RESTARTS   AGE     IP             NODE                              NOMINATED NODE   READINESS GATES
 nginx-bb865dc5f-45szb   1/1     Running   0          7m58s   10.128.2.238   worker-1.ocp4.tektutor.org.labs   <none>           <none>  
 </pre>
+
+## Lab - Editing a Pod
+```
+oc get pods
+oc edit pod nginx-bb865dc5f-45szb
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc edit pod nginx-bb865dc5f-45szb
+pod/nginx-bb865dc5f-45szb edited  
+</pre>
