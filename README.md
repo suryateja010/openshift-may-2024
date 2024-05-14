@@ -27,4 +27,4 @@
 
 - In case you cloud login username 24MAN0412_14, then you should login as user14 with password 'rps@12345' to the Server 2 (10.10.15.103).
 
-- In case your RPS cloud login username is 24MAN0113-u21, then you should login to your respective Linux server as user21 with password 'rps@12345' to the Server 3 (10.10.15.101).
+- In case your RPS cloud login username is 24MAN0113-21, then you should login to your respective Linux server as user21 with password 'rps@12345' to the Server 3 (10.10.15.101).
