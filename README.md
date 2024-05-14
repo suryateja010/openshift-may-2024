@@ -28,3 +28,7 @@
 - In case you cloud login username 24MAN0412_14, then you should login as user14 with password 'rps@12345' to the Server 2 (10.10.15.103).
 
 - In case your RPS cloud login username is 24MAN0113-21, then you should login to your respective Linux server as user21 with password 'rps@12345' to the Server 3 (10.10.15.101).
+
+## Kindly login to your RPS Lab machine and proceed with the test
+The pre-test URL is kept open on the lab machine web browser for your convenience.
+![Pre-test](pre-test.png)
