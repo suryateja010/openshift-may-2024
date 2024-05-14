@@ -430,3 +430,38 @@ worker-2.ocp4.tektutor.org.labs   Ready    worker                        28d   v
 ```
 oc edit node master-1.ocp4.tektutor.org.labs
 ```
+
+## Lab - Listing all pods(applications) on all nodes and namespaces
+```
+oc get pods --all-namespaces
+```
+
+## Lab - List the API Server ( one of the control plane component that runs in each master node )
+
+In the below command, -n represents namespaces/project.
+
+```
+oc get pods -n openshift-apiserver
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get pods -n openshift-apiserver
+NAME                         READY   STATUS    RESTARTS   AGE
+apiserver-7dbf8d7788-6nb59   2/2     Running   24         28d
+apiserver-7dbf8d7788-9zkmb   2/2     Running   24         28d
+apiserver-7dbf8d7788-lndws   2/2     Running   24         28d  
+</pre>
+
+In order to find the below pod IP address and the node each Pod is running, you could try the below command
+```
+oc get pods -n openshift-apiserver -o wide
+```
+
+Expected output
+<pre>
+jegan@tektutor.org openshift-may-2024]$ <b>oc get pods -n openshift-apiserver -o wide</b>
+NAME                         READY   STATUS    RESTARTS   AGE   IP            NODE                              NOMINATED NODE   READINESS GATES
+apiserver-7dbf8d7788-6nb59   2/2     Running   24         28d   10.128.0.8    master-1.ocp4.tektutor.org.labs   <none>           <none>
+apiserver-7dbf8d7788-9zkmb   2/2     Running   24         28d   10.129.0.45   master-2.ocp4.tektutor.org.labs   <none>           <none>
+apiserver-7dbf8d7788-lndws   2/2     Running   24         28d   10.130.0.48   master-3.ocp4.tektutor.org.labs   <none>          <none></pre>
