@@ -655,3 +655,18 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 
     kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.43 -- /agnhost serve-hostname  
 </pre>
+
+## Lab - Switching between projects
+```
+oc project default
+oc project jegan
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ <b>oc project default</b>
+Now using project "default" on server "https://api.ocp4.tektutor.org.labs:6443".
+  
+[jegan@tektutor.org openshift-may-2024]$ <b>oc project jegan</b>
+Now using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".  
+</pre>
