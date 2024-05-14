@@ -1167,6 +1167,13 @@ In the above 7080 is the port we opened on our local machine, while 8080 is the 
   3. LoadBalancer - External service ( this is meant to be used in public cloud like AWS/Azure - supports ELB/ALB in AWS/Azure) 
 
 ## Lab - Creating an internal ClusterIP Service for nginx deployment
+In order to access the ClusterIP internal service, we need to get inside some pod shell. Hence, let's deploy another application that has curl utility in it.
+```
+oc create deploy hello --image=tektutor/spring-ms:1.0
+oc get po
+```
+
+Let's create an internal clusterip service 
 ```
 oc get deploy
 oc expose deploy/nginx --type=ClusterIP --port=8080
