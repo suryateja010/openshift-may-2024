@@ -870,3 +870,83 @@ Expected output
 [jegan@tektutor.org openshift-may-2024]$ oc edit pod nginx-bb865dc5f-45szb
 pod/nginx-bb865dc5f-45szb edited  
 </pre>
+
+## Lab - Describe to get more details about a Pod
+```
+oc get pods
+oc describe pod nginx-bb865dc5f-45szb
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc describe pod nginx-bb865dc5f-45szb
+Name:             nginx-bb865dc5f-45szb
+Namespace:        jegan
+Priority:         0
+Service Account:  default
+Node:             worker-1.ocp4.tektutor.org.labs/192.168.122.228
+Start Time:       Tue, 14 May 2024 14:53:40 +0530
+Labels:           app=nginx
+                  pod-template-hash=bb865dc5f
+                  tier=fe
+Annotations:      k8s.v1.cni.cncf.io/network-status:
+                    [{
+                        "name": "openshift-sdn",
+                        "interface": "eth0",
+                        "ips": [
+                            "10.128.2.238"
+                        ],
+                        "default": true,
+                        "dns": {}
+                    }]
+                  openshift.io/scc: restricted-v2
+                  seccomp.security.alpha.kubernetes.io/pod: runtime/default
+Status:           Running
+SeccompProfile:   RuntimeDefault
+IP:               10.128.2.238
+IPs:
+  IP:           10.128.2.238
+Controlled By:  ReplicaSet/nginx-bb865dc5f
+Containers:
+  nginx:
+    Container ID:   cri-o://ce3e3f75aebe2df36755d849c967d4e1237083fedb5dbef80a29f37815eddf48
+    Image:          bitnami/nginx:latest
+    Image ID:       docker.io/bitnami/nginx@sha256:231c20d0dae6bdeb7d292c3fa8c045727883032397f2b6bbfd3067ef2499d150
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Tue, 14 May 2024 14:53:53 +0530
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-r7sq5 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-r7sq5:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+    ConfigMapName:           openshift-service-ca.crt
+    ConfigMapOptional:       <nil>
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason          Age   From               Message
+  ----    ------          ----  ----               -------
+  Normal  Scheduled       11m   default-scheduler  Successfully assigned jegan/nginx-bb865dc5f-45szb to worker-1.ocp4.tektutor.org.labs
+  Normal  AddedInterface  11m   multus             Add eth0 [10.128.2.238/23] from openshift-sdn
+  Normal  Pulling         11m   kubelet            Pulling image "bitnami/nginx:latest"
+  Normal  Pulled          10m   kubelet            Successfully pulled image "bitnami/nginx:latest" in 11.027839049s (11.027854568s including waiting)
+  Normal  Created         10m   kubelet            Created container nginx
+  Normal  Started         10m   kubelet            Started container nginx  
+</pre>
