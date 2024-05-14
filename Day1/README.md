@@ -683,7 +683,7 @@ Using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".
 </pre>
 
 ## Lab - Deploying your first application into Red Hat OpenShift
-In the below command, replace 'jegan' with your project name
+In the below command, replace 'jegan' with your project name. The below command will download the nginx:latest docker image from Docker Hub Website ( Remote Registry )
 ```
 oc project jegan
 oc create deployment nginx --image=nginx:latest
@@ -697,3 +697,11 @@ Now using project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".
 [jegan@tektutor.org openshift-may-2024]$ <b>oc create deployment nginx --image=nginx:latest</b>
 deployment.apps/nginx created  
 </pre>
+
+## Lab - Listing the application deployments
+Most resources in Kubernetes/Openshift supports Plural form, Singular form and Short name.
+```
+oc get deployments
+oc get deployment
+oc get deploy
+```
