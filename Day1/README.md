@@ -1357,6 +1357,7 @@ curl http://192.168.122.194:31485
 curl http://192.168.122.228:31485
 curl http://192.168.122.56:31485
 ```
+In the above curl command,the IP addresses belong to master-1, master-2, master-3, worker-1 and worker-2 nodes. Hence, they would be different on your openshift cluster.
 
 We don't need to worry in which node the Pod is running as the kube-proxy component running on each node does a forward if it find no pod matching the selector label.
 
