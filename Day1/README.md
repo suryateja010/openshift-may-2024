@@ -1362,3 +1362,14 @@ In the above curl command,the IP addresses belong to master-1, master-2, master-
 We don't need to worry in which node the Pod is running as the kube-proxy component running on each node does a forward if it finds no pod matching the selector label.
 
 The kube-proxy is the component that supports load-balancing to clusterip and nodeport services.
+
+
+## Info - Things to keep in mind while using nodeport service
+<pre>
+- NodePort service opens a single port in the range 30000-32767 on every node in the cluster  
+- The developer/end-user need to know the hostname of the Nodes or IP address of the nodes to access it
+- It is also possible to access the NodePort service using its service name and service port
+- Let's say your application support 100 features, if you decide to create nodeport services for all 100 features then you end up opening 100 ports on the firewall. This will invite security issues as we are forced to open lot of ports on the firewall.
+</pre>
+
+The solution recommended is use Openshift route to expose the clusterip service with an external route.
