@@ -1277,3 +1277,81 @@ Commercial support is available at
 </html>
 sh-4.4$   
 ```
+
+## Lab - Creating a NodePort external service for nginx deployment
+
+We need to first delete the clusterip service
+```
+oc get svc
+oc delete svc/nginx
+oc get svc
+```
+
+Let's create the nodport external service
+```
+oc expose deploy/nginx --type=NodePort --port=8080
+oc get services
+oc get service
+oc get svc
+oc describe svc/nginx
+```
+
+Expected output
+```
+[jegan@tektutor.org ~]$ oc delete svc/nginx
+service "nginx" deleted
+[jegan@tektutor.org ~]$ oc get svc
+No resources found in jegan namespace.
+[jegan@tektutor.org ~]$ oc expose deploy/nginx --type=NodePort --port=8080
+service/nginx exposed
+[jegan@tektutor.org ~]$ oc get services
+NAME    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+nginx   NodePort   172.30.211.41   <none>        8080:31485/TCP   5s
+[jegan@tektutor.org ~]$ oc get service
+NAME    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+nginx   NodePort   172.30.211.41   <none>        8080:31485/TCP   8s
+[jegan@tektutor.org ~]$ oc get svc
+NAME    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+nginx   NodePort   172.30.211.41   <none>        8080:31485/TCP   10s
+[jegan@tektutor.org ~]$ oc describe svc/nginx
+Name:                     nginx
+Namespace:                jegan
+Labels:                   app=nginx
+Annotations:              <none>
+Selector:                 app=nginx
+Type:                     NodePort
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       172.30.211.41
+IPs:                      172.30.211.41
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31485/TCP
+Endpoints:                10.128.0.182:8080,10.128.2.251:8080,10.129.0.66:8080 + 2 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+
+For NodePort service, openshift automatically opens a port on every node dedicated that external service. In my case, openshift has opened up 31485 on master-1, master-2, master-3, worker-1 and worker-2 nodes.
+
+Generally, Ports in the range 30000 to 32767 is reserved for the use of NodePort services in all the nodes in the Openshift cluster.
+
+Accessing the Nodeport service, we can find IP addresses of the nodes or the nodes names
+```
+oc get nodes
+oc get nodes -o wide
+```
+
+Then we access the nodeport service from outside the cluster as shown below
+```
+curl http://master-1.ocp4.tektutor.org.labs:31485
+curl http://master-2.ocp4.tektutor.org.labs:31485
+curl http://master-3.ocp4.tektutor.org.labs:31485
+curl http://worker-1.ocp4.tektutor.org.labs:31485
+curl http://worker-2.ocp4.tektutor.org.labs:31485
+```
+
+We don't need to worry in which node the Pod is running as the kube-proxy component running on each node does a forward if it find no pod matching the selector label.
+
+The kube-proxy is the component that supports load-balancing to clusterip and nodeport services.
