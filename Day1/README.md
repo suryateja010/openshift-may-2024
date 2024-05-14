@@ -252,3 +252,28 @@ Client Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.4", GitCom
 Kustomize Version: v5.0.1
 Server Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.11+ec42b99", GitCommit:"9654661a61cc44110a8a3a801a82482ab63d063d", GitTreeState:"clean", BuildDate:"2024-04-04T12:53:37Z", GoVersion:"go1.20.12 X:strictfipsruntime", Compiler:"gc", Platform:"linux/amd64"}  
 </pre>
+
+## Lab - Listing the nodes in the Red Hat OpenShift cluster
+```
+oc get nodes
+kubectl get nodes
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ <b>oc get nodes</b>
+NAME                              STATUS   ROLES                         AGE   VERSION
+master-1.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d
+master-2.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d
+master-3.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d
+worker-1.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d
+worker-2.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d
+  
+[jegan@tektutor.org openshift-may-2024]$ <b>kubectl get nodes</b>
+NAME                              STATUS   ROLES                         AGE   VERSION
+master-1.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d
+master-2.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d
+master-3.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v1.27.11+749fe1d
+worker-1.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d
+worker-2.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d  
+</pre>
