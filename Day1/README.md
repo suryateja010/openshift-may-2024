@@ -1141,7 +1141,7 @@ We should avoid this in production.
 
 ```
 oc get pods
-oc port-forward pod/nginx-bb865dc5f-nvb5h 8080:8080
+oc port-forward pod/nginx-bb865dc5f-nvb5h 7080:8080
 ```
 
 Expected output
