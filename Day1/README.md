@@ -129,7 +129,66 @@
 ## Docker - High Level Architecture
 ![Docker High Level Architecture](DockerHighLevelArchitecture.png)
 
+## What is Container Orchestration Platform ?
+- container though can be managed manually
+  - creating a container
+  - starting a container
+  - stop/restart containers
+  - kill/abort containers
+  - delete container
+- in real world no one manage container manually, hence we a software platform that can manage containerized application workloads
+- which is called Container Orchestration Platform
+- Examples
+  - Docker Swarm
+  - Google Kubernetes
+  - Red Hat OpenShift
+- the application that needs to be deployed into Container Orchestration Platforms has to be first of all containerized
+- What are the benefits of using a Container Orchestration Platforms?
+  - they offer in-built monitoring features to check the health of your application and repair it if found faulty 
+  - they also monitoring features to check the readiness and liviness of your application, if required it repairs
+  - provides an environment where you application can be made Highly available (HA)
+  - When the user traffic to your containerized application increases, container orchestration platform can automatically scale it up i.e more instances of your application to handle heavy traffic
+  - when the user traffic to your contianerized application decreases, container orchestration platform can automatically scale it down,.ie remove extra application instances which are idle
+  - supports rolling update
+    - is used to ugrage/downgrade your application from one version to other version without any down time
+  - supports many different to expose your application via Service ( service discovery )
+    - internal services 
+    - external services
+Examples
+1. Docker Swarm
+2. Google Kubernetes
+3. Red Hat OpenShift
+
+## Docker Swarm - Container Orchestration Platform
+- this is Docker's native Container Orchestration Platform
+- supports only Docker Containerized Application workloads
+- it is easy to install and learn
+- it is not production grade, hence normally no company uses this in production
+- it is good for light-weight developer/qa setup
+
+## Google kubernetes 
+- aka K8s
+- it is developed by Google in Go language
+- it is opensource & free
+- it supports many container runtimes/engines
+- it is production grade
+- Kubernetes does support a basic Dashboard(Web Interface) but it is not secure, hence administrators normally disable this to avoid any security issues
+- it doesn't support Web Interface, supports only CLI
+- supports extending Kubernetes API by adding new Custom Resource Definitions (CRD) to add your own Custom Resources (CR)s
+
 ## Red Hat OpenShift Overview
+- this Red Hat's distribution of Kubernetes
+- Red Hat OpenShift is developed on top of Google Kubernetes
+- Hence, whatever features are supported in Kubernetes are also supported in OpenShift
+- OpenShift supports many additional features
+- OpenShift supports CLI and Web Interface
+- Openshift support User Mangagement which is not supported in Kubernetes
+- OpenShift supports deploying application from source code, which is not supported in Kuberntes out of the box
+- OpenShift comes with private Container Registry out of the box unline Kubernetes
+- With the help of Custom Resource Definitions and CRs, OpenShift has added many additional features on top of Kubernetes
+- this is a paid software
+- comes with Red Hat support
+- Openshift 4.x supports only CRI-O Container Runtime and Podman Container Engine
 
 ## Red Hat OpenShift - High-Level Architecture
 ![OpenShift Architecture](openshift-architecture.png)
