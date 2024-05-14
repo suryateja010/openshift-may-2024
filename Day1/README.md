@@ -425,3 +425,8 @@ master-3.ocp4.tektutor.org.labs   Ready    control-plane,master,worker   28d   v
 worker-1.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d   192.168.122.228   <none>        Red Hat Enterprise Linux CoreOS 414.92.202403270157-0 (Plow)   5.14.0-284.59.1.el9_2.x86_64   cri-o://1.27.4-6.1.rhaos4.14.gitd09e4c0.el9
 worker-2.ocp4.tektutor.org.labs   Ready    worker                        28d   v1.27.11+749fe1d   192.168.122.56    <none>        Red Hat Enterprise Linux CoreOS 414.92.202403270157-0 (Plow)   5.14.0-284.59.1.el9_2.x86_64   cri-o://1.27.4-6.1.rhaos4.14.gitd09e4c0.el9
 </pre>
+
+## Lab - Editing a node details ( don't really edit anything )
+```
+oc edit node master-1.ocp4.tektutor.org.labs
+```
