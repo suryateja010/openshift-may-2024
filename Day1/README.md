@@ -154,6 +154,7 @@
   - supports many different to expose your application via Service ( service discovery )
     - internal services 
     - external services
+- supports inbuilt load balancing
 Examples
 1. Docker Swarm
 2. Google Kubernetes
