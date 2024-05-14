@@ -705,3 +705,36 @@ oc get deployments
 oc get deployment
 oc get deploy
 ```
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get deployments
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/1     1            0           102s
+[jegan@tektutor.org openshift-may-2024]$ oc get deployment
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/1     1            0           105s
+[jegan@tektutor.org openshift-may-2024]$ oc get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+nginx   0/1     1            0           108s  
+</pre>  
+
+
+## Lab - Listing the replicasets
+```
+oc get replicasets
+oc get replicaset
+oc get rs
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get replicasets
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-7bf8c77b5b   1         1         0       4m11s
+[jegan@tektutor.org openshift-may-2024]$ oc get replicaset
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-7bf8c77b5b   1         1         0       4m14s
+[jegan@tektutor.org openshift-may-2024]$ oc get rs
+NAME               DESIRED   CURRENT   READY   AGE
+nginx-7bf8c77b5b   1         1         0       4m16s  
+</pre>
