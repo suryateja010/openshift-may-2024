@@ -59,12 +59,25 @@
     - each Physical CPU double as 2/4/8 logical/virtual CPU Cores
   - each Operating Systems runs in a separate Virtual Machine
   - Virtual Machines are also referred as Guest OS
+  - each Virtual Machine represents one Operating System
   - Each Virtual Machines requires ( hence called heavy-weight virtualization )
     - dedicated hardware resources
       - CPU
       - RAM
       - Storage
+
+## Containerization
+- application virtualization technolgoy
+- each container represents one application process
+- container is not an Operating Sytem
+- container has one application and its dependent libraries
+- normally application processor will not get an IP address
+- but containers get an IP Address
+- container has their own file system ( files & folders )
+- container has their own network stack with software defined network card
+
 ## Virtualization vs Containerization
+
 
 ## Docker Overview
 
