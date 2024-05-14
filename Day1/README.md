@@ -1373,3 +1373,62 @@ The kube-proxy is the component that supports load-balancing to clusterip and no
 </pre>
 
 The solution recommended is use Openshift route to expose the clusterip service with an external route.
+
+## Lab - Create an external route to access a deployment from outside the cluster
+
+Route is a featured introduced in OpenShift, this is not supported in Kubernetes.
+
+```
+oc delete svc/nginx
+oc get deploy
+oc expose deploy/nginx --port=8080
+oc expose svc/nginx
+oc get route
+curl http://nginx-jegan.apps.ocp4.tektutor.org.labs
+```
+
+Expected output
+```
+[jegan@tektutor.org ~]$ oc delete svc/nginx
+service "nginx" deleted
+
+[jegan@tektutor.org ~]$ oc get deploy
+NAME    READY   UP-TO-DATE   AVAILABLE   AGE
+hello   1/1     1            1           49m
+nginx   3/3     3            3           172m
+
+[jegan@tektutor.org ~]$ oc expose deploy/nginx --port=8080
+service/nginx exposed
+
+[jegan@tektutor.org ~]$ oc expose svc/nginx
+route.route.openshift.io/nginx exposed
+
+[jegan@tektutor.org ~]$ oc get route
+NAME    HOST/PORT                                 PATH   SERVICES   PORT   TERMINATION   WILDCARD
+nginx   nginx-jegan.apps.ocp4.tektutor.org.labs          nginx      8080                 None
+
+[jegan@tektutor.org ~]$ curl http://nginx-jegan.apps.ocp4.tektutor.org.labs
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
