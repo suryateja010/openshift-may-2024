@@ -202,4 +202,24 @@ Examples
 
 ## Docker SWARM vs Kubernetes vs OpenShift
 
+## What is a Pod?
+- a collection of related containers
+- a single application can be represented by one or more Pods
+- one Pod is recommended to have one main application
+- but it is okay to have supporting container(s) along the side of the main application
+- user application runs inside Kubernetes/Openshift as Pod
+- IP address is assigned on the Pod level, hence the containers that are part of the same Pod shares the IP address
+- ports on the Pod are shared by all the containers running within the Pod
+
 ## Commonly used - Kubernetes/Openshift Resources
+- Pod
+- ReplicaSet
+- Deployment
+- DaemonSet
+- Job
+- CronJob
+- StatefulSet
+- Services
+- EndPoint
+
+
