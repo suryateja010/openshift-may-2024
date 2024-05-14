@@ -32,3 +32,7 @@
 ## Kindly login to your RPS Lab machine and proceed with the test
 The pre-test URL is kept open on the lab machine web browser for your convenience.
 ![Pre-test](pre-test.png)
+
+#### Note 
+- Kindly use your personal email-id for pre-test registration (avoid using BOFA id)
+- Copy/Paste between your machine and lab machine is disabled as per your Bank policy
