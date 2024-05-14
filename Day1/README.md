@@ -738,3 +738,23 @@ nginx-7bf8c77b5b   1         1         0       4m14s
 NAME               DESIRED   CURRENT   READY   AGE
 nginx-7bf8c77b5b   1         1         0       4m16s  
 </pre>
+
+## Listing the pods in your project
+```
+oc get pods
+oc get pod
+oc get po
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc get pods
+NAME                     READY   STATUS             RESTARTS        AGE
+nginx-7bf8c77b5b-r6q2j   0/1     CrashLoopBackOff   5 (2m38s ago)   6m6s
+[jegan@tektutor.org openshift-may-2024]$ oc get pod
+NAME                     READY   STATUS             RESTARTS        AGE
+nginx-7bf8c77b5b-r6q2j   0/1     CrashLoopBackOff   5 (2m41s ago)   6m9s
+[jegan@tektutor.org openshift-may-2024]$ oc get po
+NAME                     READY   STATUS             RESTARTS        AGE
+nginx-7bf8c77b5b-r6q2j   0/1     CrashLoopBackOff   5 (2m42s ago)   6m10s  
+</pre>
