@@ -527,3 +527,16 @@ Cleanup
 ```
 oc delete -f nginx-deploy.yml
 ```
+
+
+## Lab - Deploying an application into openshift using a spring-boot application jar from your local machine
+
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/spring-ms
+
+mvn clean package
+```
+
+Make sure to use upload the jar file found under target folder into openshift web console using deploy app via jar file.
