@@ -65,9 +65,11 @@ Expected output
 <pre>
 [root@tektutor.org ~]# docker run -d --name nginx_pause --hostname nginx gcr.io/google_containers/pause:latest
 58cae658dba0f2d80671e527181e5ccc3a3c8c0a24230be1bc31d6d0cf98bc15
+            
 [root@tektutor.org ~]# docker ps
 CONTAINER ID   IMAGE                                   COMMAND    CREATED         STATUS         PORTS     NAMES
 58cae658dba0   gcr.io/google_containers/pause:latest   "/pause"   3 seconds ago   Up 2 seconds             nginx_pause
+            
 [root@tektutor.org ~]# docker run -d --name nginx --network=container:nginx_pause bitnami/nginx:latest
 Unable to find image 'bitnami/nginx:latest' locally
 latest: Pulling from bitnami/nginx
@@ -75,15 +77,18 @@ latest: Pulling from bitnami/nginx
 Digest: sha256:476d94e773ee511bb789fafa69b2fcf39a91549dbe1386b1f64fb8f876ac3883
 Status: Downloaded newer image for bitnami/nginx:latest
 b44c9f65be28a22b9049b8ce66e83881d78bfb643c3ccb2bfb503a0a379ebd46
+            
 [root@tektutor.org ~]# docker ps
 CONTAINER ID   IMAGE                                   COMMAND                  CREATED              STATUS              PORTS     NAMES
 b44c9f65be28   bitnami/nginx:latest                    "/opt/bitnami/script…"   3 seconds ago        Up 2 seconds                  nginx
 58cae658dba0   gcr.io/google_containers/pause:latest   "/pause"                 About a minute ago   Up About a minute             nginx_pause
+            
 [root@tektutor.org ~]# docker inspect nginx_pause | grep IPA
             "SecondaryIPAddresses": null,
             "IPAddress": "172.17.0.2",
                     "IPAMConfig": null,
                     "IPAddress": "172.17.0.2",
+            
 [root@tektutor.org ~]# docker exec -it nginx sh
 $ hostname
 nginx
