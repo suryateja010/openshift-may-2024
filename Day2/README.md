@@ -539,4 +539,4 @@ cd Day2/spring-ms
 mvn clean package
 ```
 
-Make sure to use upload the jar file found under target folder into openshift web console using deploy app via jar file.
+Make sure to use the jar file found under target folder into openshift web console using deploy app via jar file.
