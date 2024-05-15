@@ -499,7 +499,7 @@ Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavaila
 No resources found in jegan namespace.            
 </pre>
 
-## Lab - Declaratively perform deployment scale up
+## Lab - Declaratively perform deployment scale up/down
 ```
 cd ~/openshift-may-2024
 git pull
@@ -510,6 +510,13 @@ oc get deploy,rs,po
 ```
 
 Now you can edit the nginx-deploy.yml file and update the replicas values from '3' to '5' and save and apply the changes.
+```
+vim nginx-deploy.yml
+oc apply -f nginx-deploy.yml
+oc get po
+```
+
+Now you can edit the nginx-deploy.yml file and update the replicas values from '5' to '3' and save and apply the changes.
 ```
 vim nginx-deploy.yml
 oc apply -f nginx-deploy.yml
