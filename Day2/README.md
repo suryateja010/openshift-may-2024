@@ -15,6 +15,6 @@ docker completion bash > /etc/bash_completion.d/docker
 exit
 ```
 
-#### How to check oc bash completion works?
+How to check oc bash completion works?
 - Try oc [space] [Tab] key
 - Try docker [space] [Tab] key
