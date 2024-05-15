@@ -455,3 +455,46 @@ Commercial support is available at
 </body>
 </html>
 ```
+
+## Lab - Deleting deployment, service and route in declarative style
+```
+cd ~/openshift-may-2024
+git pull
+
+cd Day2/declarative-manifest-scripts
+oc get all
+
+oc delete -f nginx-route.yml
+oc delete -f nginx-lb-svc.yml
+oc delete -f nginx-deploy.yml
+
+oc get all
+```
+
+
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ pwd
+/home/jegan/openshift-may-2024/Day2/declarative-manifest-scripts
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ ls -l
+total 20
+-rw-r--r-- 1 jegan jegan 245 May 15 14:46 nginx-clusterip-svc.yml
+-rw-r--r-- 1 jegan jegan 392 May 15 14:45 nginx-deploy.yml
+-rw-r--r-- 1 jegan jegan 248 May 15 14:49 nginx-lb-svc.yml
+-rw-r--r-- 1 jegan jegan 244 May 15 14:50 nginx-nodeport-svc.yml
+-rw-r--r-- 1 jegan jegan 219 May 15 15:14 nginx-route.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-route.yml 
+route.route.openshift.io "nginx" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-lb-svc.yml 
+service "nginx" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-deploy.yml 
+deployment.apps "nginx" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get all
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+No resources found in jegan namespace.            
+</pre>
