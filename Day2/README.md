@@ -165,4 +165,15 @@ curl http://192.168.122.90:8080
 - For instance, openshift runs one dns pod per node to support service discovery
 - For instance, if we need to collect permance metrics all node, all pods running in a node. We have deploy one prometheus pod per node. 
 
+## Lab - Deploying nginx into openshift in declarative style
+```
+oc project
+oc get deploy
+oc create deployment nginx --image=bitnami/nginx --replicas=3 -o yaml --dry-run=client
+oc create deployment nginx --image=bitnami/nginx --replicas=3 -o yaml --dry-run=client > nginx-deploy.yml
+oc apply -f nginx-deploy.yml
+
+oc get deploy,rs,po
+```
+
 
