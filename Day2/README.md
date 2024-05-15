@@ -231,10 +231,18 @@ nginx-bb865dc5f-nmmq7   1/1     Running   0          2m2s
 nginx-bb865dc5f-vm5cx   1/1     Running   0          2m2s            
 </pre>
 
-## Lab - Auto-generate cluster-ip internal service declarative manifests yaml code
+## Lab - Creating cluster-ip internal service declarative manifests yaml code
 ```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+
 oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client
 oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client > nginx-clusterip-svc.yml
+
+oc apply -f nginx-clusterip-svc.yml
+
+oc get svc
 ```
 
 Expected output
@@ -258,13 +266,28 @@ spec:
 status:
   loadBalancer: {}
             
-[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client > nginx-clusterip-svc.yml            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client > nginx-clusterip-svc.yml         
+
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-clusterip-svc.yml 
+service/nginx created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get svc
+NAME    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.155.144   <none>        8080/TCP   3s            
 </pre>
 
 ## Lab - Auto-generate nodeport external service declarative manifests yaml code
 ```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+
 oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client
 oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client > nginx-nodeport-svc.yml
+
+oc delete -f nginx-clusterip-svc.yml
+
+oc apply -f nginx-nodeport-svc.yml
 ```
 
 Expected output
@@ -288,13 +311,34 @@ spec:
 status:
   loadBalancer: {}
 
-[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client > nginx-nodeport-svc.yml             
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client > nginx-nodeport-svc.yml  
+
+[jegan@tektutor.org declarative-manifest-scripts]$ ls
+nginx-clusterip-svc.yml  nginx-deploy.yml  nginx-lb-svc.yml  nginx-nodeport-svc.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-clusterip-svc.yml 
+service "nginx" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-nodeport-svc.yml 
+service/nginx created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get svc
+NAME    TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+nginx   NodePort   172.30.125.21   <none>        8080:31960/TCP   3s
+            
 </pre>            
 
 ## Lab - Auto-generate loadbalancer external service declarative manifests yaml code
 ```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+
 oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client
 oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client > nginx-lb-svc.yml
+
+oc delete -f nginx-nodeport-svc.yml
+oc apply -f nginx-lb-svc.yml 
 ```
 
 Expected output
@@ -318,5 +362,19 @@ spec:
 status:
   loadBalancer: {}
             
-[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client > nginx-lb-svc.yml            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client > nginx-lb-svc.yml  
+
+[jegan@tektutor.org declarative-manifest-scripts]$ ls
+nginx-clusterip-svc.yml  nginx-deploy.yml  nginx-lb-svc.yml  nginx-nodeport-svc.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-nodeport-svc.yml 
+service "nginx" deleted
+                        
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-lb-svc.yml 
+service/nginx created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get svc
+NAME    TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
+nginx   LoadBalancer   172.30.219.56   192.168.122.90   8080:32090/TCP   3s
+            
 </pre>            
