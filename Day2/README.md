@@ -96,3 +96,45 @@ $ hostname -i
 172.17.0.2
 $ exit  
 </pre>
+
+## Lab - Creating a LoadBalancer service
+
+#### Things to note
+- This requires Metallb operator installed in your Openshift cluster(I have already installed on all 3 rps servers)
+- Metallb operator has to configured
+  - we need create an address ( range of available IP address )
+  - we need to create a Metallb controller
+
+Create an address pool - range of IP address the Metallb controller can assign to loadbalancer instances
+```
+cd ~/openshift-may-2024
+git pull
+
+cd Day2/metallb
+oc apply -f addresspool.yml
+```
+
+
+Create a metallb controller
+```
+cd ~/openshift-may-2024
+git pull
+
+cd Day2/metallb
+oc apply -f metallb.yml
+```
+
+Now you can check your loadbalancer service.  Create a lb service
+```
+oc get deploy
+oc delete svc/nginx
+oc expose deploy/nginx --type=LoadBalancer --port=8080
+oc get svc
+oc describe svc/nginx
+```
+
+Accessing the nginx web server page via lb service
+```
+curl http://<load-balancer-service-external-ip>:8080
+curl http://192.168.122.90:8080
+```
