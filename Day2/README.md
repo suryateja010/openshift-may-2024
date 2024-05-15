@@ -231,4 +231,52 @@ nginx-bb865dc5f-nmmq7   1/1     Running   0          2m2s
 nginx-bb865dc5f-vm5cx   1/1     Running   0          2m2s            
 </pre>
 
+## Lab - Auto-generate cluster-ip internal service declarative manifests yaml code
+```
+oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client
+oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client > nginx-clusterip-svc.yml
+```
 
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: nginx
+  type: ClusterIP
+status:
+  loadBalancer: {}
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=ClusterIP --port=8080 -o yaml --dry-run=client > nginx-clusterip-svc.yml            
+</pre>
+
+## Lab - Auto-generate nodeport external service declarative manifests yaml code
+```
+oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client
+oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client > nginx-nodeport-svc.yml
+```
+
+Expected output
+<pre>
+</pre>            
+
+## Lab - Auto-generate loadbalancer external service declarative manifests yaml code
+```
+oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client
+oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client > nginx-lb-svc.yml
+```
+
+Expected output
+<pre>
+</pre>            
