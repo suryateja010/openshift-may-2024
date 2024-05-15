@@ -604,6 +604,25 @@ oc delete -f nginx-rs.yml
 
 Expected output
 <pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ pwd
+/home/jegan/openshift-may-2024/Day2/declarative-manifest-scripts
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ ls -l
+total 32
+-rw-r--r-- 1 jegan jegan 488 May 15 15:35 deploy.yaml
+-rw-r--r-- 1 jegan jegan 970 May 15 15:39 devfile.yaml
+-rw-r--r-- 1 jegan jegan 245 May 15 14:46 nginx-clusterip-svc.yml
+-rw-r--r-- 1 jegan jegan 392 May 15 15:20 nginx-deploy.yml
+-rw-r--r-- 1 jegan jegan 248 May 15 14:49 nginx-lb-svc.yml
+-rw-r--r-- 1 jegan jegan 244 May 15 14:50 nginx-nodeport-svc.yml
+-rw-r--r-- 1 jegan jegan 219 May 15 15:14 nginx-route.yml
+-rw-r--r-- 1 jegan jegan 348 May 15 17:37 nginx-rs.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-rs
+error: the path "nginx-rs" does not exist
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-rs.yml 
+replicaset.apps/nginx-rs created
+            
 [jegan@tektutor.org declarative-manifest-scripts]$ oc get deploy,rs,po
 NAME                       DESIRED   CURRENT   READY   AGE
 replicaset.apps/nginx-rs   3         3         3       55s
