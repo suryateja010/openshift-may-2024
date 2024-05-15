@@ -148,3 +148,21 @@ Accessing the nginx web server page via lb service
 curl http://<load-balancer-service-external-ip>:8080
 curl http://192.168.122.90:8080
 ```
+## Inof - What is Deployment?
+- user applications are normally deployed as Deployment
+- Deployment resource is managed by Deployment Controller
+- When we deploy applications as deployment it automatically creates the below
+  - Deployment
+    - ReplicaSet ( Per application version )
+      - Pod1
+      - Pod2
+      - Pod3
+- the deployment controller doesn't assure that always the Pods are distributed equally in all nodes 
+
+## Info - What is DaemonSet?
+- If we deploy our applications as Daemonset, then the DaemonSet Controller creates pods that matches the number of nodes in the openshift cluster.
+- For instance, openshift runs one kube-proxy Pod in every node to support services (load-balancing)
+- For instance, openshift runs one dns pod per node to support service discovery
+- For instance, if we need to collect permance metrics all node, all pods running in a node. We have deploy one prometheus pod per node. 
+
+
