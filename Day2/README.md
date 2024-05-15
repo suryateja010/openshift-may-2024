@@ -231,7 +231,7 @@ nginx-bb865dc5f-nmmq7   1/1     Running   0          2m2s
 nginx-bb865dc5f-vm5cx   1/1     Running   0          2m2s            
 </pre>
 
-## Lab - Creating cluster-ip internal service declarative manifests yaml code
+## Lab - Creating cluster-ip internal service using declarative manifests yaml code
 ```
 cd ~/openshift-may-2024
 git pull
@@ -276,7 +276,7 @@ NAME    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 nginx   ClusterIP   172.30.155.144   <none>        8080/TCP   3s            
 </pre>
 
-## Lab - Auto-generate nodeport external service declarative manifests yaml code
+## Lab - Creating nodeport external service using declarative manifests yaml code
 ```
 cd ~/openshift-may-2024
 git pull
@@ -328,7 +328,7 @@ nginx   NodePort   172.30.125.21   <none>        8080:31960/TCP   3s
             
 </pre>            
 
-## Lab - Auto-generate loadbalancer external service declarative manifests yaml code
+## Lab - Creating loadbalancer external service using declarative manifests yaml code
 ```
 cd ~/openshift-may-2024
 git pull
@@ -378,3 +378,152 @@ NAME    TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
 nginx   LoadBalancer   172.30.219.56   192.168.122.90   8080:32090/TCP   3s
             
 </pre>            
+
+## Lab - Creating a route in declarative style
+```
+cd ~/openshift-may-2024
+git pull
+
+cd Day2/declarative-manifest-scripts
+
+oc expose svc/nginx -o yaml --dry-run=client 
+oc expose svc/nginx -o yaml --dry-run=client > nginx-route.yml
+
+oc get svc
+oc apply -f nginx-route.yml
+oc get route
+
+curl http://nginx-jegan.apps.ocp4.tektutor.org.labs
+```
+
+
+Expected output
+```
+nginx-clusterip-svc.yml  nginx-deploy.yml  nginx-lb-svc.yml  nginx-nodeport-svc.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get svc
+NAME    TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
+nginx   LoadBalancer   172.30.219.56   192.168.122.90   8080:32090/TCP   15m
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose svc/nginx -o yaml --dry-run=client 
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: ""
+    name: nginx
+    weight: null
+status: {}
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose svc/nginx -o yaml --dry-run=client > nginx-route.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-route.yml 
+route.route.openshift.io/nginx created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get route
+NAME    HOST/PORT                                 PATH   SERVICES   PORT   TERMINATION   WILDCARD
+nginx   nginx-jegan.apps.ocp4.tektutor.org.labs          nginx      8080                 None  
+
+[jegan@tektutor.org declarative-manifest-scripts]$ curl http://nginx-jegan.apps.ocp4.tektutor.org.labs
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
+## Lab - Deleting deployment, service and route in declarative style
+```
+cd ~/openshift-may-2024
+git pull
+
+cd Day2/declarative-manifest-scripts
+oc get all
+
+oc delete -f nginx-route.yml
+oc delete -f nginx-lb-svc.yml
+oc delete -f nginx-deploy.yml
+
+oc get all
+```
+
+
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ pwd
+/home/jegan/openshift-may-2024/Day2/declarative-manifest-scripts
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ ls -l
+total 20
+-rw-r--r-- 1 jegan jegan 245 May 15 14:46 nginx-clusterip-svc.yml
+-rw-r--r-- 1 jegan jegan 392 May 15 14:45 nginx-deploy.yml
+-rw-r--r-- 1 jegan jegan 248 May 15 14:49 nginx-lb-svc.yml
+-rw-r--r-- 1 jegan jegan 244 May 15 14:50 nginx-nodeport-svc.yml
+-rw-r--r-- 1 jegan jegan 219 May 15 15:14 nginx-route.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-route.yml 
+route.route.openshift.io "nginx" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-lb-svc.yml 
+service "nginx" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-deploy.yml 
+deployment.apps "nginx" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get all
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+No resources found in jegan namespace.            
+</pre>
+
+## Lab - Declaratively perform deployment scale up/down
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+
+oc apply -f nginx-deploy.yml
+oc get deploy,rs,po
+```
+
+Now you can edit the nginx-deploy.yml file and update the replicas values from '3' to '5' and save and apply the changes.
+```
+vim nginx-deploy.yml
+oc apply -f nginx-deploy.yml
+oc get po
+```
+
+Now you can edit the nginx-deploy.yml file and update the replicas values from '5' to '3' and save and apply the changes.
+```
+vim nginx-deploy.yml
+oc apply -f nginx-deploy.yml
+oc get po
+```
+
+Cleanup
+```
+oc delete -f nginx-deploy.yml
+```

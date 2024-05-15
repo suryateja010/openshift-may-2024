@@ -1,5 +1,12 @@
 # openshift-may-2024
 
+## Cloning this GitHub Repository 
+```
+cd ~
+git clone https://github.com/tektutor/openshift-may-2024.git
+cd openshift-may-2024
+```
+
 ## About our lab environment
 - OnPrem Production grade Red Hat OpenShift setup
   
