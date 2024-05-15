@@ -656,3 +656,37 @@ replicaset.apps "nginx-rs" deleted
             
 </pre>
 
+## Lab - Creating a Pod declaratively
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+oc get po
+oc apply -f pod.yml
+oc get po
+
+oc delete -f pod.yml
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f pod.yml 
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "my-nginx-container" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "my-nginx-container" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "my-nginx-container" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "my-nginx-container" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+pod/my-nginx-pod created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po
+NAME             READY   STATUS    RESTARTS   AGE
+my-nginx-pod     1/1     Running   0          5s
+nginx-rs-lgj94   1/1     Running   0          5m16s
+nginx-rs-n2vzr   1/1     Running   0          5m16s
+nginx-rs-v8r2c   1/1     Running   0          5m16s
+
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete pod my-nginx-pod
+pod "my-nginx-pod" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-rs-lgj94   1/1     Running   0          5m41s
+nginx-rs-n2vzr   1/1     Running   0          5m41s
+nginx-rs-v8r2c   1/1     Running   0          5m41s            
+</pre>
