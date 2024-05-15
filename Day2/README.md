@@ -584,3 +584,56 @@ to build a new example application in Ruby. Or use kubectl to deploy a simple Ku
 [jegan@tektutor.org Day2]$ oc expose service/nginx
 route.route.openshift.io/nginx exposed            
 </pre>
+
+## Lab - Deploying Replicaset in declarative style
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+
+oc apply -f nginx-rs.yml
+oc get deploy,rs,po
+
+oc scale rs/nginx-rs --replicas=5
+oc get po
+oc scale rs/nginx-rs --replicas=3
+oc get po
+
+oc delete -f nginx-rs.yml
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get deploy,rs,po
+NAME                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-rs   3         3         3       55s
+
+NAME                 READY   STATUS    RESTARTS   AGE
+pod/nginx-rs-5hjp8   1/1     Running   0          55s
+pod/nginx-rs-cxtmt   1/1     Running   0          55s
+pod/nginx-rs-xcsfz   1/1     Running   0          55s
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc scale replicaset.apps/nginx-rs --replicas=5
+replicaset.apps/nginx-rs scaled
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po -w
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-rs-2q4k9   1/1     Running   0          3s
+nginx-rs-5hjp8   1/1     Running   0          116s
+nginx-rs-cxtmt   1/1     Running   0          116s
+nginx-rs-jk8np   1/1     Running   0          3s
+nginx-rs-xcsfz   1/1     Running   0          116s
+            
+^C[jegan@tektutor.org declarative-manifest-scripts]$ oc scale replicaset.apps/nginx-rs --replicas=3
+replicaset.apps/nginx-rs scaled
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po -w
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-rs-5hjp8   1/1     Running   0          2m7s
+nginx-rs-cxtmt   1/1     Running   0          2m7s
+nginx-rs-xcsfz   1/1     Running   0          2m7s
+^C[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-rs.yml 
+replicaset.apps "nginx-rs" deleted
+            
+</pre>
+
