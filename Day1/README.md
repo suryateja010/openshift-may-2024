@@ -1,9 +1,8 @@
 # Day 1
 
 ## What is dual-booting or multi-booting?
-- Let's say we have a laption with Windows 10 pre-installed
-- I need to do some prototype in Ubuntu
-- You can use a system utlity called Boot Loaders like LILO, Grub 1, Grub2
+- Let's say we have a laptop with Windows 10 pre-installed and we need to do some prototype in Ubuntu
+- You can use a system utility called Boot Loader like LILO, Grub 1, Grub2
 - When we install boot loaders it gets installed in your hard disk Master Boot Record(MBR) - Sector 0, Byte 0 in your hard disk (512 bytes)
 - When we boot our machine, BIOS POST (Power On Self Test), once the BIOS is loaded, BIOS will initialize all hardwares and then it then it instructs the CPU to load and run the Boot loader application from MBR
 - The boot application starts scanning for Operating Systems installed on your Hard disk(s), if it finds more than one OS then it gives a menu for you to choose which OS you wish to boot into
@@ -17,8 +16,8 @@
   - Intel ( Virtualization Feature is called VT-X )
   - Apple Silicon (ARM Processor)
 - through virtualization we can run multiple operating systems side by side on the same laptop/desktop/workstation/server
-- many OS can be active on the same machine 
-- Virtualization can be enabled/disabed on the BIOS level too
+- many OS can be actively running on the same machine 
+- Virtualization can be enabled/disabed on the BIOS level if the system has a Processor that supports Virtualization
 - you can install Hypervisor
 - Examples
   - Oracle VirtualBox ( Type 2 -Windows, Mac OS-X, Linux, Free )
@@ -34,7 +33,7 @@
     - They don't need a Host OS
       
   - Type 2 Hypervisors
-    - they are installed on Laptops/Desktops/Workstation with some OS
+    - they are installed on Laptops/Desktops/Workstation with some OS (Windows, Linux or Mac )
     - they depend on Host OS ( Windows, Mac, Linux )
 
 ## Processor and Packaging
@@ -45,7 +44,7 @@
   - MCM - Multiple chip Module
     - 2/4/8 Processors can be package in a single IC
 - Examples
-  - One Processors supports - 128/256/512 CPU Cores
+  - One Processor supports - 128/256/512 CPU Cores
   - MCM IC - let's take that it has 4 Processors in a single IC
   - Let's assume, each Processor supports 128 CPU Cores
   - Generally Server motherboards comes with multiple Processor Sockets ( 2/4/8 Socket Motherboards )
@@ -56,11 +55,11 @@
     - Total CPU Core - 4 Sockets x 4 x 128 = 2048 CPU Cores
     - Total logical cores - 2048 x 2 = 4096 virtual cores in a single server
   - Hypertheading
-    - each Physical CPU double as 2/4/8 logical/virtual CPU Cores
+    - each Physical CPU core supports 2/4/8 threads i.e logical/virtual CPU Cores
   - each Operating Systems runs in a separate Virtual Machine
   - Virtual Machines are also referred as Guest OS
   - each Virtual Machine represents one Operating System
-  - Each Virtual Machines requires ( hence called heavy-weight virtualization )
+  - Each Virtual Machine requires dedicated hardware resources, hence called heavy-weight virtualization
     - dedicated hardware resources
       - CPU
       - RAM
@@ -79,10 +78,12 @@
   - reason being, containers shares the hardwares on the underlying host operating systems
   - containers also shares the host-os Kernel
   - containers doesn't have their own kernel
+- containers won't be able to replace a Virtualization technology
+- while containers hosts a single application, VM hosts an Operating System. Hence, they are complementing technogy not competing technology. They are normally used in combination, so they can and will co-exist.
 
 ## Virtualization vs Containerization
 - Each Virtual Machine represents an OS while each Container represents a single application
-- Each Virtual Machines gets dedicated hardware resources while containers running on the same OS shares the hardware resources on the host OS
+- Each Virtual Machine gets dedicated hardware resources, while containers running on the same OS shares the hardware resources on the host OS
 - Each OS running on the Virtual Machine has its own Kernel, while containers don't have their own kernel, containers depends on Host OS kernel
 
 ## Container vs Normal Application Process
@@ -96,21 +97,24 @@
    - helps in isolating one container from other containers running on the same OS
       
 2. Control Group(CGroups)
+   - to ensure every container shares the hardware resources co-operatively Control Groups are used
+   - if this isn't not done, at times certain containers uses all the hardwares resources leaving other containers to starve
    - helps in applying resource quota restrictions like
-     - we can restrict a container on how many CPU Cores it can use at any point of time
+     - we can restrict a container on how many CPU Cores it can use at the max at any point of time
      - we can restrict how much RAM a container use at the max
      - we can restrict, how much storage a container can use at the max
 
 ## What is a Container Runtime?
 - it is low-level software that manages container images and containers
-- it is not so user-friendly, hence end-user like us normally won't use Container Runtimes directly
+- it is not so user-friendly, hence end-users like us normally won't use Container Runtimes directly
 - Examples
   - runC
   - CRI-O
 
 ## What is a Container Engine?
-- it is high-level software
+- it is a high-level software
 - it is very user-friendly
+- We dont' have to know, low-level kernel stuffs to create containers
 - internally it depends on Container Runtimes to manage container images and containers
 - Examples
   - Docker is a Container Engine that depends on containerd which in turn depends on runC container runtime
@@ -120,8 +124,8 @@
 - is a Container Engine
 - follows client/server architecure
 - the server component runs as a background service
-- server component runs in root user context, hence all containers gain admin privilege
-- is developed in Go language by Docker In organization
+- server component runs in root user context, hence all containers gains admin privilege
+- is developed in Go language by Docker Inc organization
 - comes in 2 flavours
   1. Docker Community Edition called Docker CE
   2. Docker Enterprise Edition called Docker EE (requires license)
@@ -130,31 +134,31 @@
 ![Docker High Level Architecture](DockerHighLevelArchitecture.png)
 
 ## What is Container Orchestration Platform ?
-- container though can be managed manually
+- containers, can be managed manually or via Orchestration Platforms
   - creating a container
   - starting a container
   - stop/restart containers
   - kill/abort containers
   - delete container
-- in real world no one manage container manually, hence we a software platform that can manage containerized application workloads
-- which is called Container Orchestration Platform
+- in real world no one manages container manually, hence we a software platform that can manage containerized application workloads
+- which is called Container Orchestration Platforms
 - Examples
   - Docker Swarm
   - Google Kubernetes
   - Red Hat OpenShift
 - the application that needs to be deployed into Container Orchestration Platforms has to be first of all containerized
 - What are the benefits of using a Container Orchestration Platforms?
-  - they offer in-built monitoring features to check the health of your application and repair it if found faulty 
-  - they also monitoring features to check the readiness and liviness of your application, if required it repairs
+  - they offer in-built monitoring features to check the health of your application and repairs it your application is found faulty
+  - they also support monitoring features to check the readiness and liviness of your application, if required it repairs
   - provides an environment where you application can be made Highly available (HA)
   - When the user traffic to your containerized application increases, container orchestration platform can automatically scale it up i.e more instances of your application to handle heavy traffic
   - when the user traffic to your contianerized application decreases, container orchestration platform can automatically scale it down,.ie remove extra application instances which are idle
   - supports rolling update
-    - is used to ugrage/downgrade your application from one version to other version without any down time
-  - supports many different to expose your application via Service ( service discovery )
+    - is used to upgrade/downgrade your application from one version to other version without any down time
+  - supports many different types of services to expose your application via Service abstraction ( service discovery )
     - internal services 
     - external services
-- supports inbuilt load balancing
+- supports in-built load balancing
 Examples
 1. Docker Swarm
 2. Google Kubernetes
@@ -165,7 +169,7 @@ Examples
 - supports only Docker Containerized Application workloads
 - it is easy to install and learn
 - it is not production grade, hence normally no company uses this in production
-- it is good for light-weight developer/qa setup
+- it is good for light-weight developer/qa setup or for learning Orchestration concepts
 
 ## Google kubernetes 
 - aka K8s
@@ -178,23 +182,23 @@ Examples
 - supports extending Kubernetes API by adding new Custom Resource Definitions (CRD) to add your own Custom Resources (CR)s
 
 ## What is Kubernetes/OpenShift Operator
-- it is a combition of Custom Resource & Custom Controller
-- Kuberntes & Openshift support many different Controllers
-- Controller are the one which supports monitoring
-- Each Controller manages(monitors) one type of Resource
+- it is a package of many Custom Resource & Custom Controllers
+- Kubernetes & Openshift supports many different Controllers
+- Controller supports monitoring
+- Each Controller manages(monitors) one type of Kubernetes/Openshift Resource
 
 ## Red Hat OpenShift Overview
-- this Red Hat's distribution of Kubernetes
-- Red Hat OpenShift is developed on top of Google Kubernetes
+- Red Hat's distribution of Kubernetes
+- Red Hat OpenShift is developed on top of opensource Google Kubernetes
 - Hence, whatever features are supported in Kubernetes are also supported in OpenShift
 - OpenShift supports many additional features
 - OpenShift supports CLI and Web Interface
-- Openshift support User Mangagement which is not supported in Kubernetes
-- OpenShift supports deploying application from source code, which is not supported in Kuberntes out of the box
-- OpenShift comes with private Container Registry out of the box unline Kubernetes
+- Openshift supports User Mangagement which is not supported in Kubernetes
+- OpenShift supports deploying application from source code, which is not supported in Kubernetes out of the box
+- OpenShift comes with private Container Registry out of the box unlike Kubernetes
 - With the help of Custom Resource Definitions and CRs, OpenShift has added many additional features on top of Kubernetes
-- this is a paid software
-- comes with Red Hat support
+- this is a paid enterprise software that requires license
+- comes with world-wide Red Hat support
 - Openshift 4.x supports only CRI-O Container Runtime and Podman Container Engine
 - AWS Managed OpenShift is called ROSA ( installing and managing openshift is taken care by AWS )
 - Azure Managed openshift is called ARO ( installing and managing openshift is taken care by Azure )
@@ -202,8 +206,6 @@ Examples
 ## Red Hat OpenShift - High-Level Architecture
 ![OpenShift Architecture](openshift-architecture.png)
 ![OpenShift Architecture](openshift-architecture-2.png)
-
-## Docker SWARM vs Kubernetes vs OpenShift
 
 ## What is a Pod?
 - a collection of related containers
@@ -226,7 +228,7 @@ Examples
 - EndPoint
 
 ## What are the Kubernetes Control Plane Components?
-Kubernetes/OpenShift supports 4 Control Plan Components
+Kubernetes/OpenShift supports 4 Control Plane Components
 1. API Server
 2. etcd key/value datastore/database
 3. scheduler
@@ -236,23 +238,25 @@ The control plane components runs only in the master nodes.
 
 #### API Server
 - supports REST API for all the features supported by OpenShift
-- all the Openshift components will be communicated only to API Server
-- other components are not allowed to communicate with each other
+- all the Openshift components will be communicate only to API Server
+- other components are not allowed to communicate with each other directly
+- every components communication flows via API Server only in Kubernetes/Openshift
 - API Server maintains the nodes, cluster, application status in the etcd database
 - only API Server will have access to etcd database
-- In our openshift cluster 3 master nodes are there, hence 3 API Servers i.e one API Server per master node is there
-- API Server sends broadcasting events whenever any update happens in the API Server
+- In our openshift cluster, 3 master nodes are there, hence 3 API Servers i.e one API Server per master node is there
+- API Server sends broadcasting events whenever any update happens in the etcd database
   - new record added
   - existing record updated
   - existing record deleted
   
 #### etcd database
-- opensource database that can used outside the scope of Kubernetes/openshift as well
+- opensource database that can be used outside the scope of Kubernetes/openshift as well
+- generally they work in groups ( cluster of etcd databases )
 - it stores key/values as records
 - since we have 3 master nodes, there are 3 etcd databases which works as a cluster
 
 #### Scheduler
-- this is the component which is responsible to find a healthy node where a new Pod can be deployed
+- this is the component that is responsible to find a healthy node where a new Pod can be deployed
 - Scheduler sends its scheduling recommendataion to API Server
 - API Server updates the scheduling info on each Pod stored in the etcd database
 - API Server broadcasts events for each Pod deployed onto some node
@@ -261,7 +265,7 @@ The control plane components runs only in the master nodes.
 - kubelet keeps monitoring the status of the container running on the local node and reports the status on a heart-beat like periodic fashion to the API Server
 
 #### Controller Managers
-- it is a collection of many controller
+- it is a collection of many controllers
 - Examples
   - Deployment Controller
   - ReplicaSet Controller
