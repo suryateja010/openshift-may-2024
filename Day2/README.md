@@ -498,3 +498,25 @@ deployment.apps "nginx" deleted
 Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
 No resources found in jegan namespace.            
 </pre>
+
+## Lab - Declaratively perform deployment scale up
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+
+oc apply -f nginx-deploy.yml
+oc get deploy,rs,po
+```
+
+Now you can edit the nginx-deploy.yml file and update the replicas values from '3' to '5' and save and apply the changes.
+```
+vim nginx-deploy.yml
+oc apply -f nginx-deploy.yml
+oc get po
+```
+
+Cleanup
+```
+oc delete -f nginx-deploy.yml
+```
