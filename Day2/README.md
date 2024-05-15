@@ -176,4 +176,59 @@ oc apply -f nginx-deploy.yml
 oc get deploy,rs,po
 ```
 
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc create deployment nginx --image=bitnami/nginx --replicas=3 -o yaml --dry-run=client
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: bitnami/nginx
+        name: nginx
+        resources: {}
+status: {}
+
+oc create deployment nginx --image=bitnami/nginx --replicas=3 -o yaml --dry-run=client > nginx-deploy.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ ls
+nginx-deploy.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-deploy.yml 
+deployment.apps/nginx created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get deploy,rs,po
+NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/nginx   0/3     3            0           4s
+
+NAME                              DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-bb865dc5f   3         3         0       4s
+
+NAME                        READY   STATUS              RESTARTS   AGE
+pod/nginx-bb865dc5f-bh24c   0/1     ContainerCreating   0          4s
+pod/nginx-bb865dc5f-nmmq7   0/1     ContainerCreating   0          4s
+pod/nginx-bb865dc5f-vm5cx   0/1     ContainerCreating   0          4s
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po
+NAME                    READY   STATUS    RESTARTS   AGE
+nginx-bb865dc5f-bh24c   1/1     Running   0          2m2s
+nginx-bb865dc5f-nmmq7   1/1     Running   0          2m2s
+nginx-bb865dc5f-vm5cx   1/1     Running   0          2m2s            
+</pre>
+
 
