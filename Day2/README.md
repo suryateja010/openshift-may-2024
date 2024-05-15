@@ -604,6 +604,25 @@ oc delete -f nginx-rs.yml
 
 Expected output
 <pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ pwd
+/home/jegan/openshift-may-2024/Day2/declarative-manifest-scripts
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ ls -l
+total 32
+-rw-r--r-- 1 jegan jegan 488 May 15 15:35 deploy.yaml
+-rw-r--r-- 1 jegan jegan 970 May 15 15:39 devfile.yaml
+-rw-r--r-- 1 jegan jegan 245 May 15 14:46 nginx-clusterip-svc.yml
+-rw-r--r-- 1 jegan jegan 392 May 15 15:20 nginx-deploy.yml
+-rw-r--r-- 1 jegan jegan 248 May 15 14:49 nginx-lb-svc.yml
+-rw-r--r-- 1 jegan jegan 244 May 15 14:50 nginx-nodeport-svc.yml
+-rw-r--r-- 1 jegan jegan 219 May 15 15:14 nginx-route.yml
+-rw-r--r-- 1 jegan jegan 348 May 15 17:37 nginx-rs.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-rs
+error: the path "nginx-rs" does not exist
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-rs.yml 
+replicaset.apps/nginx-rs created
+            
 [jegan@tektutor.org declarative-manifest-scripts]$ oc get deploy,rs,po
 NAME                       DESIRED   CURRENT   READY   AGE
 replicaset.apps/nginx-rs   3         3         3       55s
@@ -637,3 +656,37 @@ replicaset.apps "nginx-rs" deleted
             
 </pre>
 
+## Lab - Creating a Pod declaratively
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+oc get po
+oc apply -f pod.yml
+oc get po
+
+oc delete -f pod.yml
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f pod.yml 
+Warning: would violate PodSecurity "restricted:v1.24": allowPrivilegeEscalation != false (container "my-nginx-container" must set securityContext.allowPrivilegeEscalation=false), unrestricted capabilities (container "my-nginx-container" must set securityContext.capabilities.drop=["ALL"]), runAsNonRoot != true (pod or container "my-nginx-container" must set securityContext.runAsNonRoot=true), seccompProfile (pod or container "my-nginx-container" must set securityContext.seccompProfile.type to "RuntimeDefault" or "Localhost")
+pod/my-nginx-pod created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po
+NAME             READY   STATUS    RESTARTS   AGE
+my-nginx-pod     1/1     Running   0          5s
+nginx-rs-lgj94   1/1     Running   0          5m16s
+nginx-rs-n2vzr   1/1     Running   0          5m16s
+nginx-rs-v8r2c   1/1     Running   0          5m16s
+
+[jegan@tektutor.org declarative-manifest-scripts]$ oc delete pod my-nginx-pod
+pod "my-nginx-pod" deleted
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-rs-lgj94   1/1     Running   0          5m41s
+nginx-rs-n2vzr   1/1     Running   0          5m41s
+nginx-rs-v8r2c   1/1     Running   0          5m41s            
+</pre>
