@@ -527,3 +527,113 @@ Cleanup
 ```
 oc delete -f nginx-deploy.yml
 ```
+
+
+## Lab - Deploying an application into openshift using a spring-boot application jar from your local machine
+
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/spring-ms
+
+mvn clean package
+```
+
+Make sure to use the jar file found under target folder into openshift web console using deploy app via jar file.
+
+## Lab - Deploying application using new-app from an existing Docker Hub Container Image 
+
+If you already have project in your name, delete it.  Replace 'jegan' with your name.
+```
+oc delete project jegan
+```
+
+In the below command, replace 'jegan' with your name. 
+```
+oc new-project jegan
+oc new-app bitnami/nginx:latest 
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org Day2]$ oc new-project jegan
+Already on project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.43 -- /agnhost serve-hostname
+
+[jegan@tektutor.org Day2]$ oc new-app bitnami/nginx:latest
+--> Found container image 8c08fc2 (37 hours old) from Docker Hub for "bitnami/nginx:latest"
+
+    * An image stream tag will be created as "nginx:latest" that will track this image
+
+--> Creating resources ...
+    imagestream.image.openshift.io "nginx" created
+    deployment.apps "nginx" created
+    service "nginx" created
+--> Success
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/nginx' 
+    Run 'oc status' to view your app.
+
+[jegan@tektutor.org Day2]$ oc expose service/nginx
+route.route.openshift.io/nginx exposed            
+</pre>
+
+## Lab - Deploying Replicaset in declarative style
+```
+cd ~/openshift-may-2024
+git pull
+cd Day2/declarative-manifest-scripts
+
+oc apply -f nginx-rs.yml
+oc get deploy,rs,po
+
+oc scale rs/nginx-rs --replicas=5
+oc get po
+oc scale rs/nginx-rs --replicas=3
+oc get po
+
+oc delete -f nginx-rs.yml
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get deploy,rs,po
+NAME                       DESIRED   CURRENT   READY   AGE
+replicaset.apps/nginx-rs   3         3         3       55s
+
+NAME                 READY   STATUS    RESTARTS   AGE
+pod/nginx-rs-5hjp8   1/1     Running   0          55s
+pod/nginx-rs-cxtmt   1/1     Running   0          55s
+pod/nginx-rs-xcsfz   1/1     Running   0          55s
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc scale replicaset.apps/nginx-rs --replicas=5
+replicaset.apps/nginx-rs scaled
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po -w
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-rs-2q4k9   1/1     Running   0          3s
+nginx-rs-5hjp8   1/1     Running   0          116s
+nginx-rs-cxtmt   1/1     Running   0          116s
+nginx-rs-jk8np   1/1     Running   0          3s
+nginx-rs-xcsfz   1/1     Running   0          116s
+            
+^C[jegan@tektutor.org declarative-manifest-scripts]$ oc scale replicaset.apps/nginx-rs --replicas=3
+replicaset.apps/nginx-rs scaled
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get po -w
+NAME             READY   STATUS    RESTARTS   AGE
+nginx-rs-5hjp8   1/1     Running   0          2m7s
+nginx-rs-cxtmt   1/1     Running   0          2m7s
+nginx-rs-xcsfz   1/1     Running   0          2m7s
+^C[jegan@tektutor.org declarative-manifest-scripts]$ oc delete -f nginx-rs.yml 
+replicaset.apps "nginx-rs" deleted
+            
+</pre>
+
