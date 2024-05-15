@@ -231,7 +231,7 @@ nginx-bb865dc5f-nmmq7   1/1     Running   0          2m2s
 nginx-bb865dc5f-vm5cx   1/1     Running   0          2m2s            
 </pre>
 
-## Lab - Creating cluster-ip internal service declarative manifests yaml code
+## Lab - Creating cluster-ip internal service using declarative manifests yaml code
 ```
 cd ~/openshift-may-2024
 git pull
@@ -276,7 +276,7 @@ NAME    TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
 nginx   ClusterIP   172.30.155.144   <none>        8080/TCP   3s            
 </pre>
 
-## Lab - Auto-generate nodeport external service declarative manifests yaml code
+## Lab - Creating nodeport external service using declarative manifests yaml code
 ```
 cd ~/openshift-may-2024
 git pull
@@ -328,7 +328,7 @@ nginx   NodePort   172.30.125.21   <none>        8080:31960/TCP   3s
             
 </pre>            
 
-## Lab - Auto-generate loadbalancer external service declarative manifests yaml code
+## Lab - Creating loadbalancer external service using declarative manifests yaml code
 ```
 cd ~/openshift-may-2024
 git pull
