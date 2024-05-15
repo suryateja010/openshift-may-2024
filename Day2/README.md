@@ -10,7 +10,7 @@ exit
 
 In case of RHEL
 ```
-oc completion bash > /etc/bash_completion.d
+oc completion bash > /etc/bash_completion.d/
 docker completion bash > /etc/bash_completion.d/docker
 exit
 ```
