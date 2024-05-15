@@ -540,3 +540,47 @@ mvn clean package
 ```
 
 Make sure to use the jar file found under target folder into openshift web console using deploy app via jar file.
+
+## Lab - Deploying application using new-app from an existing Docker Hub Container Image 
+
+If you already have project in your name, delete it.  Replace 'jegan' with your name.
+```
+oc delete project jegan
+```
+
+In the below command, replace 'jegan' with your name. 
+```
+oc new-project jegan
+oc new-app bitnami/nginx:latest 
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org Day2]$ oc new-project jegan
+Already on project "jegan" on server "https://api.ocp4.tektutor.org.labs:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=registry.k8s.io/e2e-test-images/agnhost:2.43 -- /agnhost serve-hostname
+
+[jegan@tektutor.org Day2]$ oc new-app bitnami/nginx:latest
+--> Found container image 8c08fc2 (37 hours old) from Docker Hub for "bitnami/nginx:latest"
+
+    * An image stream tag will be created as "nginx:latest" that will track this image
+
+--> Creating resources ...
+    imagestream.image.openshift.io "nginx" created
+    deployment.apps "nginx" created
+    service "nginx" created
+--> Success
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/nginx' 
+    Run 'oc status' to view your app.
+
+[jegan@tektutor.org Day2]$ oc expose service/nginx
+route.route.openshift.io/nginx exposed            
+</pre>
