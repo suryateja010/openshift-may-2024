@@ -99,6 +99,11 @@ $ exit
 
 ## Lab - Creating a LoadBalancer service
 
+For detailed instructions, you may check my medium blog
+<pre>
+https://medium.com/tektutor/using-metallb-loadbalancer-with-bare-metal-openshift-onprem-4230944bfa35
+</pre>
+
 #### Things to note
 - This requires Metallb operator installed in your Openshift cluster(I have already installed on all 3 rps servers)
 - Metallb operator has to configured
