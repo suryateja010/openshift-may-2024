@@ -1,5 +1,10 @@
 # Day 2
 
+## Info - In case you are curious to know how etcd databses in 3 master nodes synchronizes data automatically, you may check this
+<pre>
+https://etcd.io/docs/v3.5/tutorials/how-to-setup-cluster/            
+</pre>
+
 ## Lab - Bash completion for oc commands (requires root privilege - hence I have already installed it for you)
 In case of CentOS 7.x
 ```
