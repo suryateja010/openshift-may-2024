@@ -269,6 +269,26 @@ oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client > ng
 
 Expected output
 <pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: nginx
+  type: NodePort
+status:
+  loadBalancer: {}
+
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=NodePort --port=8080 -o yaml --dry-run=client > nginx-nodeport-svc.yml             
 </pre>            
 
 ## Lab - Auto-generate loadbalancer external service declarative manifests yaml code
@@ -279,4 +299,24 @@ oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client 
 
 Expected output
 <pre>
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: nginx
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose deploy/nginx --type=LoadBalancer --port=8080 -o yaml --dry-run=client > nginx-lb-svc.yml            
 </pre>            
