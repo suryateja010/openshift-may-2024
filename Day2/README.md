@@ -378,3 +378,80 @@ NAME    TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
 nginx   LoadBalancer   172.30.219.56   192.168.122.90   8080:32090/TCP   3s
             
 </pre>            
+
+## Lab - Creating a route in declarative style
+```
+cd ~/openshift-may-2024
+git pull
+
+cd Day2/declarative-manifest-scripts
+
+oc expose svc/nginx -o yaml --dry-run=client 
+oc expose svc/nginx -o yaml --dry-run=client > nginx-route.yml
+
+oc get svc
+oc apply -f nginx-route.yml
+oc get route
+
+curl http://nginx-jegan.apps.ocp4.tektutor.org.labs
+```
+
+
+Expected output
+```
+nginx-clusterip-svc.yml  nginx-deploy.yml  nginx-lb-svc.yml  nginx-nodeport-svc.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get svc
+NAME    TYPE           CLUSTER-IP      EXTERNAL-IP      PORT(S)          AGE
+nginx   LoadBalancer   172.30.219.56   192.168.122.90   8080:32090/TCP   15m
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose svc/nginx -o yaml --dry-run=client 
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  port:
+    targetPort: 8080
+  to:
+    kind: ""
+    name: nginx
+    weight: null
+status: {}
+[jegan@tektutor.org declarative-manifest-scripts]$ oc expose svc/nginx -o yaml --dry-run=client > nginx-route.yml
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc apply -f nginx-route.yml 
+route.route.openshift.io/nginx created
+            
+[jegan@tektutor.org declarative-manifest-scripts]$ oc get route
+NAME    HOST/PORT                                 PATH   SERVICES   PORT   TERMINATION   WILDCARD
+nginx   nginx-jegan.apps.ocp4.tektutor.org.labs          nginx      8080                 None  
+
+[jegan@tektutor.org declarative-manifest-scripts]$ curl http://nginx-jegan.apps.ocp4.tektutor.org.labs
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
