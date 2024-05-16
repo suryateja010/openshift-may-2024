@@ -57,3 +57,50 @@ cd Day3/peristent-volume/wordpress
 
 ./deploy.sh
 ```
+
+Expected output
+<pre>
+[jegan@tektutor.org wordpress]$ ls
+deploy.sh           mariadb-pv.yml   wordpress-deploy.yml  wordpress-route.yml
+mariadb-deploy.yml  mariadb-svc.yml  wordpress-pvc.yml     wordpress-svc.yml
+mariadb-pvc.yml     undeploy.sh      wordpress-pv.yml
+[jegan@tektutor.org wordpress]$ pwd
+/home/jegan/openshift-may-2024/Day3/persistent-volume/wordpress
+[jegan@tektutor.org wordpress]$ ./deploy.sh 
+\nDeploying mariadb sever ...
+persistentvolume/mariadb-pv-jegan created
+persistentvolumeclaim/mariadb-pvc-jegan created
+deployment.apps/mariadb created
+service/mariadb created
+\nDeploying wordpress server ...
+persistentvolume/wordpress-pv-jegan created
+persistentvolumeclaim/wordpress-pvc-jegan created
+deployment.apps/wordpress created
+service/wordpress created
+route.route.openshift.io/wordpress created
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+NAME                             READY   STATUS              RESTARTS   AGE
+pod/mariadb-76d9668b99-9zhsn     0/1     ContainerCreating   0          3s
+pod/wordpress-79d484b45f-mnwhc   0/1     ContainerCreating   0          1s
+
+NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/mariadb     ClusterIP   172.30.171.135   <none>        3306/TCP   3s
+service/wordpress   ClusterIP   172.30.238.248   <none>        8080/TCP   1s
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mariadb     0/1     1            0           3s
+deployment.apps/wordpress   0/1     1            0           1s
+
+NAME                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/mariadb-76d9668b99     1         1         0       3s
+replicaset.apps/wordpress-79d484b45f   1         1         0       1s
+
+NAME                                   IMAGE REPOSITORY                                               TAGS     UPDATED
+imagestream.image.openshift.io/nginx   image-registry.openshift-image-registry.svc:5000/jegan/nginx   latest   19 hours ago
+
+NAME                                 HOST/PORT                                     PATH   SERVICES    PORT   TERMINATION   WILDCARD
+route.route.openshift.io/wordpress   wordpress-jegan.apps.ocp4.tektutor.org.labs          wordpress   8080                 None  
+</pre>
+
+At this point, you should be able to click on the wordpress route url to access the wordpress blog page
+![wordpress](wordpress.png)
