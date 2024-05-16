@@ -143,3 +143,101 @@ cd Day3/persistent-volume/wordpress-with-configmaps-and-secrets
 
 ./deploy.sh
 ```
+
+Expected output
+<pre>
+jegan@tektutor.org wordpress-with-configmaps-and-secrets]$ ./deploy.sh 
+\nDeploying mariadb sever ...
+configmap/mariadb-configuration created
+secret/mariadb-login-credentials created
+persistentvolume/mariadb-pv-jegan created
+persistentvolumeclaim/mariadb-pvc-jegan created
+deployment.apps/mariadb created
+service/mariadb created
+\nDeploying wordpress server ...
+persistentvolume/wordpress-pv-jegan created
+persistentvolumeclaim/wordpress-pvc-jegan created
+deployment.apps/wordpress created
+service/wordpress created
+route.route.openshift.io/wordpress created
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+NAME                            READY   STATUS              RESTARTS   AGE
+pod/mariadb-548d8f9546-kjgq4    0/1     ContainerCreating   0          3s
+pod/wordpress-6c67477d9-wx4zh   0/1     ContainerCreating   0          1s
+
+NAME                TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/mariadb     ClusterIP   172.30.51.139   <none>        3306/TCP   3s
+service/wordpress   ClusterIP   172.30.249.38   <none>        8080/TCP   1s
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mariadb     0/1     1            0           3s
+deployment.apps/wordpress   0/1     1            0           1s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/mariadb-548d8f9546    1         1         0       3s
+replicaset.apps/wordpress-6c67477d9   1         1         0       1s
+
+NAME                                   IMAGE REPOSITORY                                               TAGS     UPDATED
+imagestream.image.openshift.io/nginx   image-registry.openshift-image-registry.svc:5000/jegan/nginx   latest   21 hours ago
+
+NAME                                 HOST/PORT                                     PATH   SERVICES    PORT   TERMINATION   WILDCARD
+route.route.openshift.io/wordpress   wordpress-jegan.apps.ocp4.tektutor.org.labs          wordpress   8080                 None
+[jegan@tektutor.org wordpress-with-configmaps-and-secrets]$ ./undeploy.sh 
+\nUndeploying wordpress server ...
+route.route.openshift.io "wordpress" deleted
+service "wordpress" deleted
+deployment.apps "wordpress" deleted
+persistentvolumeclaim "wordpress-pvc-jegan" deleted
+persistentvolume "wordpress-pv-jegan" deleted
+\nUndeploying mariadb sever ...
+service "mariadb" deleted
+deployment.apps "mariadb" deleted
+persistentvolumeclaim "mariadb-pvc-jegan" deleted
+persistentvolume "mariadb-pv-jegan" deleted
+configmap "mariadb-configuration" deleted
+secret "mariadb-login-credentials" deleted
+[jegan@tektutor.org wordpress-with-configmaps-and-secrets]$ ./deploy.sh 
+\nDeploying mariadb sever ...
+configmap/mariadb-configuration created
+secret/mariadb-login-credentials created
+persistentvolume/mariadb-pv-jegan created
+persistentvolumeclaim/mariadb-pvc-jegan created
+deployment.apps/mariadb created
+service/mariadb created
+\nDeploying wordpress server ...
+persistentvolume/wordpress-pv-jegan created
+persistentvolumeclaim/wordpress-pvc-jegan created
+deployment.apps/wordpress created
+service/wordpress created
+route.route.openshift.io/wordpress created
+Warning: apps.openshift.io/v1 DeploymentConfig is deprecated in v4.14+, unavailable in v4.10000+
+NAME                            READY   STATUS              RESTARTS   AGE
+pod/mariadb-548d8f9546-tdfdh    0/1     ContainerCreating   0          4s
+pod/wordpress-6c67477d9-fnx8z   0/1     ContainerCreating   0          2s
+
+NAME                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/mariadb     ClusterIP   172.30.107.117   <none>        3306/TCP   3s
+service/wordpress   ClusterIP   172.30.210.167   <none>        8080/TCP   1s
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/mariadb     0/1     1            0           4s
+deployment.apps/wordpress   0/1     1            0           2s
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/mariadb-548d8f9546    1         1         0       4s
+replicaset.apps/wordpress-6c67477d9   1         1         0       2s
+
+NAME                                   IMAGE REPOSITORY                                               TAGS     UPDATED
+imagestream.image.openshift.io/nginx   image-registry.openshift-image-registry.svc:5000/jegan/nginx   latest   21 hours ago
+
+NAME                                 HOST/PORT                                     PATH   SERVICES    PORT   TERMINATION   WILDCARD
+route.route.openshift.io/wordpress   wordpress-jegan.apps.ocp4.tektutor.org.labs          wordpress   8080                 None  
+</pre>
+
+You can verify the mariadb pod environments
+![mariadb](mariadb.png)
+
+You can also verify the wordpress pod environments
+![wordpress](wordpress3.png)
+
+
