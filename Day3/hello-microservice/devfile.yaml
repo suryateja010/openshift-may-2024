@@ -1,13 +1,12 @@
 schemaVersion: 2.2.0
 metadata:
   name: tektutor-springboot-microservice 
-
   schemaversion: 2.2.0
-  displayName: TekTutor Spring Boot Microservice  
-  description: A TekTutor sample Spring Boot Microservice 
+  displayName: TekTutor - Springboot Hello Microservice  
+  description: A TekTutor sample Springboot Hello Microservice 
   tags:
     - Java
-    - Spring
+    - Springboot
     - Microservice
     - OpenShift
   projectType: springboot
@@ -20,29 +19,31 @@ projects:
         origin: "https://github.com/tektutor/openshift-may-2024.git"
         checkoutFrom: 
           revision: main
+        contextDir: "Day3/hello-microservice"
 
 attributes:
   persistVolumes: 'false'
+
 components:
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
       dockerfile:
-        uri: Dockerfile
+        uri: ./Dockerfile
         buildContext: .
         rootRequired: false
 
   - name: deploy-mariadb
     openshift:
-      uri: deploy-mariadb.yml
+      uri: ./deploy-mariadb.yml
 
   - name: deploy-hello-microservice
      openshift:
-       uri: deploy-hello-microservice.yml
-       endpoints:
-        - name: hello
-          targetPort: 8080
-          exposure: public
+       uri: ./deploy-hello-microservice.yml
+     endpoints:
+      - name: hello
+        targetPort: 8080
+        exposure: public
 commands:
   - id: build-image
     apply:
@@ -50,7 +51,7 @@ commands:
   - id: mariadb
     apply:
       component: deploy-mariadb
-  - id: hello-microservice
+  - id: hello
     apply:
       component: deploy-hello-microservice    
   - id: deploy
@@ -58,7 +59,7 @@ commands:
       commands:
         - build-image
         - mariadb
-        - hello-microservice
+        - hello
       group:
         kind: deploy
         isDefault: true
