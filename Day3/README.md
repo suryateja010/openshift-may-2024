@@ -117,7 +117,7 @@ At this point, you should be able to click on the wordpress route url to access 
 ![wordpress](wordpress1.png)
 ![wordpress](wordpress2.png)
 
-Once you are done with is exercise, you can delete the wordpress deployment as shown below
+Once you are done with the exercise, you can delete the wordpress deployment as shown below
 ```
 cd ~/openshift-may-2024
 git pull
