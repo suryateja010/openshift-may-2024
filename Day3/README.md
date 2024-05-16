@@ -134,3 +134,12 @@ cd Day3/persistent-volume/wordpress
 
 ./undeploy.sh
 ```
+
+## Lab - Wordpress and mariadb multi-pod application deployment with configmap and secrets
+```
+cd ~/openshift-may-2024
+git pull
+cd Day3/persistent-volume/wordpress-with-configmaps-and-secrets
+
+./deploy.sh
+```
