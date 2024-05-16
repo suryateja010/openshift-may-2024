@@ -103,4 +103,5 @@ route.route.openshift.io/wordpress   wordpress-jegan.apps.ocp4.tektutor.org.labs
 </pre>
 
 At this point, you should be able to click on the wordpress route url to access the wordpress blog page
-![wordpress](wordpress.png)
+![wordpress](wordpress1.png)
+![wordpress](wordpress2.png)
