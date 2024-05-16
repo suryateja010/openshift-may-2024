@@ -138,7 +138,7 @@ spec:
         app: hello 
     spec:
       containers:
-      - image: image-registry.openshift-image-registry.svc:5000/jegan/hello:latest
+        - image: tektutor-spring-microservice:latest 
         name: hello 
 
         env:
@@ -178,6 +178,4 @@ spec:
     targetPort: 8080 
   selector:
     app: hello 
-
 ---
-

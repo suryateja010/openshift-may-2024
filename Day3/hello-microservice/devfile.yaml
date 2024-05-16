@@ -21,13 +21,12 @@ components:
         rootRequired: false
 
   - name: kubernetes-deploy
-    attributes:
-      deployment/replicas: 1
-      deployment/cpuRequest: 10m
-      deployment/memoryRequest: 180Mi
-      deployment/container-port: 8080
     kubernetes:
       uri: deploy.yaml
+    endpoints:
+    - name: hello
+      targetPort: 8080
+      exposure: public
 commands:
   - id: build-image
     apply:
