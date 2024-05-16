@@ -1,7 +1,7 @@
 schemaVersion: 2.2.0
 metadata:
   name: tektutor-springboot-microservice 
-  schemaVersion: 2.2.0
+  version: 2.1.0
   displayName: TekTutor - Springboot Hello Microservice  
   description: A TekTutor sample Springboot Hello Microservice 
   tags:
