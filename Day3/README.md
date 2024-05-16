@@ -1,5 +1,23 @@
 # Day 3
 
+## Info - What is Persistent Volume(PV)?
+- Persistent Volume is the disk storage created by the Openshift administrators with cluster-wide access
+- Persistent Volume is an external disk storage
+- this can be NFS storage, AWS EBS, AWS S3, Azure Storage, etc.,
+- Administrators can provision many Persistent volumes either manually or dynamically via storage class
+
+## Info - What is Persistent Volume Claim(PVC)?
+- Any stateful application that needs to store data in an external storage has to request for external storage by expressing its requirement in the form of Persistent Volume Claim(PVC)
+- This can be done by a developer with non-administrative access
+- The PVC name is then used in the application deployment
+- OpenShift will search for Peristent Volumes that matches
+  - Disk Size
+  - Access Mode
+  - Label Selector if mentioned
+  - Storage Class if mentioned
+  - Volume mode if mentioned
+- If OpenShift is not able to find a Persistent Volume matching the Persistent Volume Claim defintion, then the Pod that depends on it will be kept in Pending status until OpenShift finds a Persistent Volume matches the Persisten Volume Claim definition.
+
 ## Lab - Deploying mariadb db server with persistent volume and claims
 ```
 cd ~/openshift-may-2024
@@ -50,6 +68,8 @@ exit
 ```
 
 ## Lab - Deploying a multi-pod wordpress and mariadb blog web site
+You need to edit the yml files and replace 'jegan' with your names before proceeding with the below instructions.
+
 ```
 cd ~/openshift-may-2024
 git pull
@@ -105,3 +125,21 @@ route.route.openshift.io/wordpress   wordpress-jegan.apps.ocp4.tektutor.org.labs
 At this point, you should be able to click on the wordpress route url to access the wordpress blog page
 ![wordpress](wordpress1.png)
 ![wordpress](wordpress2.png)
+
+Once you are done with the exercise, you can delete the wordpress deployment as shown below
+```
+cd ~/openshift-may-2024
+git pull
+cd Day3/persistent-volume/wordpress
+
+./undeploy.sh
+```
+
+## Lab - Wordpress and mariadb multi-pod application deployment with configmap and secrets
+```
+cd ~/openshift-may-2024
+git pull
+cd Day3/persistent-volume/wordpress-with-configmaps-and-secrets
+
+./deploy.sh
+```
