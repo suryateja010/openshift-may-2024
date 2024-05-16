@@ -25,7 +25,7 @@ spec:
 
         env:
         - name: WORDPRESS_DATABASE_HOST
-          value: mariadb
+          value: mariadb # This is the mariadb service name - service discovery 
 
         - name: WORDPRESS_DATABASE_PORT_NUMBER
           value: "3306"
