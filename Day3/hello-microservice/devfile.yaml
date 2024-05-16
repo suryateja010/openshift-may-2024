@@ -21,11 +21,11 @@ components:
         rootRequired: false
 
   - name: deploy-mariadb
-    openshift:
+    kubernetes:
       uri: deploy-mariadb.yml
 
   - name: deploy-hello-microservice
-    openshift:
+    kubernetes:
       uri: deploy-hello-microservice.yml
       endpoints:
       - name: hello
