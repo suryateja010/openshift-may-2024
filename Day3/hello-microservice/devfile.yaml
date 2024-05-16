@@ -28,10 +28,6 @@ components:
       deployment/container-port: 8080
     kubernetes:
       uri: deploy.yaml
-    endpoints:
-      - name: web
-        targetPort: 8080
-        exposure: public      
 commands:
   - id: build-image
     apply:
