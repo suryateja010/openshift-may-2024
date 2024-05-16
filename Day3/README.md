@@ -4,7 +4,7 @@
 ```
 cd ~/openshift-may-2024
 git pull
-cd Day3/persistent-volume
+cd Day3/persistent-volume/mariadb
 
 oc apply -f pv.yml
 oc apply -f pvc.yml
@@ -47,4 +47,13 @@ INSERT INTO training VALUES ( 2, "Linux Driver Development", "5 Days" );
 INSERT INTO training VALUES ( 3, "Advanced Linux Internals", "5 Days" );
 SELECT * FROM training;
 exit
+```
+
+## Lab - Deploying a multi-pod wordpress and mariadb blog web site
+```
+cd ~/openshift-may-2024
+git pull
+cd Day3/peristent-volume/wordpress
+
+./deploy.sh
 ```
