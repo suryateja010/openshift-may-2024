@@ -30,7 +30,7 @@ components:
       name: hello
       uri: deploy-hello-microservice.yml
       endpoints:
-    - - name: hello
+      - name: hello
         targetPort: 8080
         exposure: public
 commands:
