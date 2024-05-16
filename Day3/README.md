@@ -1,5 +1,14 @@
 # Day 3
 
+## Info - What is Persistent Volume(PV)?
+- Persistent Volume is the disk storage Openshift administrators create with cluster-wide access
+- Persistent Volume is an external disk storage
+- this can be NFS storage, AWS EBS, AWS S3, Azure Storage, etc.,
+- Administrators can provision many Persistent volumes manually
+
+
+## Info - What is Persistent Volume Claim(PVC)?
+
 ## Lab - Deploying mariadb db server with persistent volume and claims
 ```
 cd ~/openshift-may-2024
@@ -50,6 +59,8 @@ exit
 ```
 
 ## Lab - Deploying a multi-pod wordpress and mariadb blog web site
+You need to edit the yml files and replace 'jegan' with your names before proceeding with the below instructions.
+
 ```
 cd ~/openshift-may-2024
 git pull
@@ -105,3 +116,12 @@ route.route.openshift.io/wordpress   wordpress-jegan.apps.ocp4.tektutor.org.labs
 At this point, you should be able to click on the wordpress route url to access the wordpress blog page
 ![wordpress](wordpress1.png)
 ![wordpress](wordpress2.png)
+
+Once you are done with is exercise, you can delete the wordpress deployment as shown below
+```
+cd ~/openshift-may-2024
+git pull
+cd Day3/persistent-volume/wordpress
+
+./undeploy.sh
+```
