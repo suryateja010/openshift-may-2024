@@ -2,7 +2,7 @@ schemaVersion: 2.2.0
 metadata:
   name: tektutor-springboot-microservice 
 
-  version: 2.2.0
+  schemaversion: 2.2.0
   displayName: TekTutor Spring Boot Microservice  
   description: A TekTutor sample Spring Boot Microservice 
   tags:
