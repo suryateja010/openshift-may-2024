@@ -35,14 +35,18 @@ commands:
   - id: build-image
     apply:
       component: image-build
-  - id: deployk8s
+  - id: mariadb
     apply:
-      component: kubernetes-deploy
+      component: deploy-mariadb
+  - id: hello-microservice
+    apply:
+      component: deploy-hello-microservice    
   - id: deploy
     composite:
       commands:
         - build-image
-        - deployk8s
+        - mariadb
+        - hello-microservice
       group:
         kind: deploy
         isDefault: true
