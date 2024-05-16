@@ -22,12 +22,10 @@ components:
 
   - name: deploy-mariadb
     openshift:
-      name: mariadb
       uri: deploy-mariadb.yml
 
   - name: deploy-hello-microservice
     openshift:
-      name: hello
       uri: deploy-hello-microservice.yml
       endpoints:
       - name: hello
