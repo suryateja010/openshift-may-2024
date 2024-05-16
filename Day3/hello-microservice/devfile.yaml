@@ -1,9 +1,8 @@
 schemaVersion: 2.2.0
 metadata:
-  schemaVersion: 2.2.0
   name: tektutor-springboot-microservice 
 
-  version: 1.0.0
+  version: 2.2.0
   displayName: TekTutor Spring Boot Microservice  
   description: A TekTutor sample Spring Boot Microservice 
   tags:
@@ -18,7 +17,7 @@ projects:
   - name: hello-microservice
     git:
       remotes:
-        origin: 'https://github.com/tektutor/openshift-may-2024.git'
+        origin: "https://github.com/tektutor/openshift-may-2024.git"
         checkoutFrom: 
           revision: main
 
