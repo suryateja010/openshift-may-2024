@@ -20,12 +20,12 @@ components:
         buildContext: .
         rootRequired: false
 
-  - name: deploy-mariadb
-    kubernetes:
+  - openshift:
+      name: deploy-mariadb
       uri: deploy-mariadb.yml
 
-  - name: deploy-hello-microservice
-    kubernetes:
+  - openshift:
+      name: deploy-hello-microservice
       uri: deploy-hello-microservice.yml
       endpoints:
       - name: hello
