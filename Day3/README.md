@@ -1,13 +1,22 @@
 # Day 3
 
 ## Info - What is Persistent Volume(PV)?
-- Persistent Volume is the disk storage Openshift administrators create with cluster-wide access
+- Persistent Volume is the disk storage created by the Openshift administrators with cluster-wide access
 - Persistent Volume is an external disk storage
 - this can be NFS storage, AWS EBS, AWS S3, Azure Storage, etc.,
-- Administrators can provision many Persistent volumes manually
-
+- Administrators can provision many Persistent volumes either manually or dynamically via storage class
 
 ## Info - What is Persistent Volume Claim(PVC)?
+- Any stateful application that needs to store data in an external storage has to request for external storage by expressing its requirement in the form of Persistent Volume Claim(PVC)
+- This can be done by a developer with non-administrative access
+- The PVC name is then used in the application deployment
+- OpenShift will search for Peristent Volumes that matches
+  - Disk Size
+  - Access Mode
+  - Label Selector if mentioned
+  - Storage Class if mentioned
+  - Volume mode if mentioned
+- If OpenShift is not able to find a Persistent Volume matching the Persistent Volume Claim defintion, then the Pod that depends on it will be kept in Pending status until OpenShift finds a Persistent Volume matches the Persisten Volume Claim definition.
 
 ## Lab - Deploying mariadb db server with persistent volume and claims
 ```
