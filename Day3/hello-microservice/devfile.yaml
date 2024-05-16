@@ -20,13 +20,16 @@ components:
         buildContext: .
         rootRequired: false
 
-  - name: kubernetes-deploy
-    kubernetes:
-      uri: deploy.yaml
-    endpoints:
-    - name: hello
-      targetPort: 8080
-      exposure: public
+  - name: deploy-mariadb
+    openshift:
+      uri: deploy-mariadb.yml
+  - name: deploy-hello-microservice
+    openshift:
+      uri: deploy-hello-microservice.yml
+      endpoints:
+    - - name: hello
+        targetPort: 8080
+        exposure: public
 commands:
   - id: build-image
     apply:
