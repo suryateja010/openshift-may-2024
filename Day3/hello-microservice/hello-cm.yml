@@ -3,5 +3,4 @@ kind: ConfigMap
 metadata:
   name: mariadb-configuration 
 data:
-  jdbc-url: "jdbc:mysql://localhost:3306/tektutor"
-  db_name: wordpress
+  jdbc_url: "jdbc:mysql://mariadb:3306/tektutor"

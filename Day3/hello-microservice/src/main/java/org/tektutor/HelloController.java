@@ -11,9 +11,9 @@ public class HelloController {
 
 	public String readGreetingMsgFromDB() {
 		//String url = "jdbc:mysql://localhost:3306/tektutor";
-		String url = System.getenv("jdbc-url");
-		String username = System.getenv("username");
-		String password = System.getenv("password");
+		String url = System.getenv("JDBC_URL");
+		String username = System.getenv("USERNAME");
+		String password = System.getenv("PASSWORD");
 
 		String query = "select * from greeting";
 
