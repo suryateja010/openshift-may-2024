@@ -241,3 +241,50 @@ You can also verify the wordpress pod environments
 ![wordpress](wordpress3.png)
 
 
+## Lab - Deploy our custom multi-pod spring-boot microservice that retrieves data from mariadb
+```
+oc new-app hello https://github.com/tektutor/openshift-may-2024.git --context-dir=Day3/hello-microservice --strategy=docker
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org openshift-may-2024]$ oc new-app hello https://github.com/tektutor/openshift-may-2024.git --context-dir=Day3/hello-microservice --strategy=docker
+error: only a partial match was found for "hello": "tektutor/hello-microservice:1.0"
+
+Argument 'hello' was classified as an image, image~source, or loaded template reference.
+
+The argument "hello" only partially matched the following container image, OpenShift image stream, or template:
+
+* container image "tektutor/hello-microservice:1.0", 51067ff, from local, 393.999mb, buildkit.dockerfile.v0
+  Use --image="tektutor/hello-microservice:1.0" to specify this image or template
+
+[jegan@tektutor.org openshift-may-2024]$ oc new-app --name=hello https://github.com/tektutor/openshift-may-2024.git --context-dir=Day3/hello-microservice --strategy=docker
+--> Found container image 41ecfe9 (9 days old) from registry.access.redhat.com for "registry.access.redhat.com/ubi8/openjdk-11"
+
+    Java Applications 
+    ----------------- 
+    Platform for building and running plain Java applications (fat-jar and flat classpath)
+
+    Tags: builder, java
+
+    * An image stream tag will be created as "openjdk-11:latest" that will track the source image
+    * A Docker build using source code from https://github.com/tektutor/openshift-may-2024.git will be created
+      * The resulting image will be pushed to image stream tag "hello:latest"
+      * Every time "openjdk-11:latest" changes a new build will be triggered
+
+--> Creating resources ...
+    imagestream.image.openshift.io "hello" created
+    buildconfig.build.openshift.io "hello" created
+    deployment.apps "hello" created
+    service "hello" created
+--> Success
+    Build scheduled, use 'oc logs -f buildconfig/hello' to track its progress.
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/hello' 
+    Run 'oc status' to view your app.  
+</pre>
+
+You may check the build log as shown below
+```
+oc logs -f bc/hello
+```
