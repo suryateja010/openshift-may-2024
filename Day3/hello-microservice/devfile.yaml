@@ -20,17 +20,17 @@ components:
         buildContext: .
         rootRequired: false
 
-  - openshift:
-      name: deploy-mariadb
+  - name: deploy-mariadb
+    openshift:
       uri: deploy-mariadb.yml
 
-  - openshift:
-      name: deploy-hello-microservice
-      uri: deploy-hello-microservice.yml
-      endpoints:
-      - name: hello
-        targetPort: 8080
-        exposure: public
+  -  name: deploy-hello-microservice
+     openshift:
+       uri: deploy-hello-microservice.yml
+       endpoints:
+        - name: hello
+          targetPort: 8080
+          exposure: public
 commands:
   - id: build-image
     apply:
