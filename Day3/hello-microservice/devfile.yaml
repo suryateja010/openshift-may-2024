@@ -11,6 +11,17 @@ metadata:
     - OpenShift
   projectType: springboot
   language: Java
+
+projects:
+  - name: hello-microservice
+    git:
+      remotes:
+        origin: 'https://github.com/tektutor/openshift-may-2024.git'
+        checkoutFrom: 
+          revision: main
+
+attributes:
+  persistVolumes: 'false'
 components:
   - name: image-build
     image:
@@ -24,7 +35,7 @@ components:
     openshift:
       uri: deploy-mariadb.yml
 
-  -  name: deploy-hello-microservice
+  - name: deploy-hello-microservice
      openshift:
        uri: deploy-hello-microservice.yml
        endpoints:
