@@ -15,14 +15,14 @@ components:
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
-      dockerfile:
+      dockerFile:
         uri: Dockerfile
         buildContext: .
         rootRequired: false
 
   - name: kubernetes-deploy
     attributes:
-      deployment/replicas: 3
+      deployment/replicas: 1
       deployment/cpuRequest: 10m
       deployment/memoryRequest: 180Mi
       deployment/container-port: 8080
