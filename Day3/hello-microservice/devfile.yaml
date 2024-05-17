@@ -32,14 +32,16 @@ commands:
   - id: build-image
     apply:
       component: image-build
-  - id: deploy
+
+  - id: k8s-deploy
     apply:
       component: kubernetes-deploy
+
   - id: deploy
     composite:
       commands:
         - build-image
-        - deploy
+        - k8s-deploy
       group:
         kind: deploy
         isDefault: true
