@@ -193,3 +193,31 @@ localhost:6379> get msg
 localhost:6379> exit
 $ exit
 </pre>
+
+
+## Lab - Deploying an Angularjs application into openshift
+
+Navigate to Developer Context
+![angular](angular1.png)
+
+Click on Add menu
+![angular](angular2.png)
+
+Click on "Import From Git"
+![angular](angular3.png)
+
+Type this as GitHub url 
+<pre>
+https://github.com/redhat-developer-demos/Angular-openshift-example.git
+</pre>
+Under "Resource Type" make sure you selected "Deployment".
+
+Other options, you may Accept all defaults and scroll down to click the "Create" button.
+![angular](angular4.png)
+![angular](angular5.png)
+![angular](angular6.png)
+![angular](angular7.png)
+![angular](angular8.png)
+![angular](angular9.png)
+
+
