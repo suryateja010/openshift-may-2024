@@ -24,7 +24,6 @@ components:
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
-      autoBuild: true
       dockerfile:
         uri: Dockerfile
         buildContext: .
