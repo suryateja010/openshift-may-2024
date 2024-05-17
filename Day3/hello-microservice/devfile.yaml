@@ -23,6 +23,13 @@ components:
   - name: kubernetes-deploy
     kubernetes:
       uri: deploy.yaml
+      endpoints:
+      - name: web
+        targetPort: 8080
+        exposure: public
+      - name: db
+        targetPort: 3306
+        exposure: none
 commands:
   - id: build-image
     apply:
@@ -31,13 +38,6 @@ commands:
   - id: k8s-deploy
     apply:
       component: kubernetes-deploy
-    endpoints:
-    - name: web
-      targetPort: 8080
-      exposure: public
-    - name: db
-      targetPort: 3306
-      exposure: none
 
   - id: deploy
     composite:
