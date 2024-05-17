@@ -11,10 +11,6 @@ metadata:
     - OpenShift
   language: Java
 components:
-  - name: pull-image
-    container:
-      image: ubuntu:22.04
-
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
