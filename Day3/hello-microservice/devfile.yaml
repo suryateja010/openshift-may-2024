@@ -11,11 +11,6 @@ metadata:
     - OpenShift
   language: Java
 components:
-  - name: pull-image
-    container:
-      image: registry.access.redhat.com/ubi8/openjdk-11  
-      command: ['sleep', 'infinity']
-      
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
@@ -25,14 +20,10 @@ components:
         buildContext: .
         rootRequired: false
 
-  - name: deploy-mariadb
+  - name: k8s-deploy 
     openshift:
-      uri: deploy-mariadb.yml
-
-  - name: deploy-hello-microservice
-     openshift:
-       uri: ./deploy-hello-microservice.yml
-     endpoints:
+      uri: deploy.yaml
+      endpoints:
       - name: hello
         targetPort: 8080
         exposure: public
@@ -41,17 +32,13 @@ commands:
   - id: build-image
     apply:
       component: image-build
-  - id: mariadb
+  - id: hello 
     apply:
-      component: deploy-mariadb
-  - id: hello
-    apply:
-      component: deploy-hello-microservice    
+      component: k8s-deploy 
   - id: deploy
     composite:
       commands:
         - build-image
-        - mariadb
         - hello
       group:
         kind: deploy
