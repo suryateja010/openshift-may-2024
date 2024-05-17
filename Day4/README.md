@@ -29,3 +29,105 @@ helm list
 ```
 
 You may verify if the wordpress and mysql is deployed properly.
+
+## Lab - Deploying redis database with persistent volume
+```
+oc new-app --name=redis -e REDIS_PASSWORD=pass@123 bitnami/redis:latest --dry-run -o yaml
+oc new-app --name=redis -e REDIS_PASSWORD=pass@123 bitnami/redis:latest --dry-run -o yaml > deploy-redis.yml
+
+```
+
+Expected output
+<pre>
+[jegan@tektutor.org redis]$ oc new-app --name=redis -e REDIS_PASSWORD=pass@123 bitnami/redis:latest --dry-run -o yaml
+apiVersion: v1
+items:
+- apiVersion: image.openshift.io/v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: redis
+      app.kubernetes.io/component: redis
+      app.kubernetes.io/instance: redis
+    name: redis
+  spec:
+    lookupPolicy:
+      local: false
+    tags:
+    - annotations:
+        openshift.io/imported-from: bitnami/redis:latest
+      from:
+        kind: DockerImage
+        name: bitnami/redis:latest
+      generation: null
+      importPolicy:
+        importMode: Legacy
+      name: latest
+      referencePolicy:
+        type: ""
+  status:
+    dockerImageRepository: ""
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"redis:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"redis\")].image"}]'
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: redis
+      app.kubernetes.io/component: redis
+      app.kubernetes.io/instance: redis
+    name: redis
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        deployment: redis
+    strategy: {}
+    template:
+      metadata:
+        annotations:
+          openshift.io/generated-by: OpenShiftNewApp
+        creationTimestamp: null
+        labels:
+          deployment: redis
+      spec:
+        containers:
+        - env:
+          - name: REDIS_PASSWORD
+            value: pass@123
+          image: ' '
+          name: redis
+          ports:
+          - containerPort: 6379
+            protocol: TCP
+          resources: {}
+  status: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftNewApp
+    creationTimestamp: null
+    labels:
+      app: redis
+      app.kubernetes.io/component: redis
+      app.kubernetes.io/instance: redis
+    name: redis
+  spec:
+    ports:
+    - name: 6379-tcp
+      port: 6379
+      protocol: TCP
+      targetPort: 6379
+    selector:
+      deployment: redis
+  status:
+    loadBalancer: {}
+kind: List
+metadata: {}  
+</pre>
