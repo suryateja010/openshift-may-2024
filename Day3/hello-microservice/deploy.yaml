@@ -71,7 +71,6 @@ spec:
       containers:
       - image: bitnami/mariadb:latest
         name: mariadb
-
         env:
         - name: MARIADB_ROOT_USER
           valueFrom: 
@@ -111,7 +110,6 @@ spec:
     app: mariadb
 status:
   loadBalancer: {}
----
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -168,18 +166,4 @@ spec:
     targetPort: 8080 
   selector:
     app: hello 
----
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  labels:
-    app: hello 
-  name: hello 
-spec:
-  port:
-    targetPort: 8080
-  to:
-    kind: ""
-    name: hello 
-    weight: null
 ---
