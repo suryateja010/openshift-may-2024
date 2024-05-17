@@ -1,5 +1,10 @@
 # Day 4
 
+## References - You may find some interesting openshift examples here
+<pre>
+https://github.com/redhat-developer-demos  
+</pre>
+
 ## Installing Helm package manager in Linux
 ```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
