@@ -30,7 +30,7 @@ components:
         rootRequired: false
 
   - name: deploy-mariadb
-    openshift:
+    kubernetes:
       uri: deploy-mariadb.yml
 
   - name: deploy-microservice 
