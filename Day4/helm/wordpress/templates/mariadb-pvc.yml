@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mariadb-pvc-jegan  # Replace 'jegan' with your name
+  name: mariadb-pvc-{{ .Values.pvLabel }}
 spec:
   selector:
     matchLabels:
-      name: jegan # Replace 'jegan' with your name
+      name: {{ .Values.pvLabel }} 
       tier: be
   accessModes:
   - ReadWriteOnce
