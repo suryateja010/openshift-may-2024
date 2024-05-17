@@ -1,10 +1,20 @@
 schemaVersion: 2.2.0
 metadata:
-  name: tektutor-hello-microservice
+  name: java-springboot
+  version: 1.2.1
+  displayName: TekTutor - Spring Boot® Hello Microservice
+  description: A TekTutor Spring Boot® Hello Microservice sample application
+  projectType: springboot
+  language: Java
+  provider: Red Hat
+parent:
+  id: java-springboot
+  registryUrl: 'https://registry.devfile.io'
+  version: 1.2.0
 components:
   - name: image-build
     image:
-      imageName: tektutor-spring-microservice:latest
+      imageName: java-springboot-image:latest
       dockerfile:
         uri: Dockerfile
         buildContext: .
@@ -17,7 +27,6 @@ components:
       deployment/container-port: 8080
     kubernetes:
       uri: deploy-mariadb.yml
-    kubernetes:
       uri: deploy-hello-microservice.yml
       endpoints:
         - name: http-8080
