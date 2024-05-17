@@ -40,8 +40,8 @@ git pull
 cd Day4/redis
 oc apply -f redis-pv.yml
 oc apply -f redis-pvc.yml
-oc apply -f deploy.redis.yml
-oc apply -f deploy-route.yml
+oc apply -f deploy-redis.yml
+oc apply -f redis-route.yml
 
 oc rsh deploy/redis
 
