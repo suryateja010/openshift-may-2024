@@ -1,4 +1,5 @@
 schemaVersion: 2.2.0
+
 metadata:
   name: tektutor-springboot-microservice 
   version: 1.0.0
@@ -10,7 +11,9 @@ metadata:
     - Microservice
     - OpenShift
   language: Java
+
 components:
+
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
@@ -29,21 +32,25 @@ components:
       uri: deploy-hello-microservice.yml
   
 commands:
-  - id: build-image
+
+  - id: build
     apply:
       component: image-build
-  - id: mariadb
+
+  - id: backend
     apply:
       component: deploy-mariadb
-  - id: hello 
+
+  - id: frontend 
     apply:
       component: deploy-microservice 
+
   - id: deploy
     composite:
       commands:
-        - build-image
-        - mariadb
-        - hello
+        - build
+        - backend
+        - frontend
       group:
         kind: deploy
         isDefault: true
