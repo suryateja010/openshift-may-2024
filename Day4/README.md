@@ -225,4 +225,31 @@ Other options, you may Accept all defaults and scroll down to click the "Create"
 ![angular](angular8.png)
 ![angular](angular9.png)
 
+## Lab - Deploying a sample reactjs application into openshift
+
+First navigate to Developer context.
+![reactjs](reactjs1.png)
+
+Click on "Add" menu
+![reactjs](reactjs2.png)
+
+We need to click on "All Services" Under "Developer Catalog"
+![reactjs](reactjs3.png)
+
+Click on "Languages" Under "All Items"
+![reactjs](reactjs4.png)
+
+Under the "Language Search option" type "react"
+![reactjs](reactjs5.png)
+
+Select the "React Web Application" Template
+![reactjs](reactjs6.png)
+
+Click on "Instantiate Template"
+![reactjs](reactjs7.png)
+
+Scroll down and click on "Create" button
+![reactjs](reactjs8.png)
+![reactjs](reactjs9.png)
+![reactjs](reactjs10.png)
 
