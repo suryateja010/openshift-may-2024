@@ -1,70 +1,56 @@
 schemaVersion: 2.2.0
-
 metadata:
   name: java-springboot
   version: 1.2.1
-  attributes:
-    alpha.dockerimage-port: 8081  
-  displayName: TekTutor - SpringBoot Hello Microservice  
-  description: A TekTutor sample SpringBoot Hello Microservice 
+  displayName: Spring Boot®
+  description: Spring Boot® using Maven
+  icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/spring.svg
   tags:
     - Java
-    - Springboot
-    - Microservice
-    - OpenShift
+    - Spring
   projectType: springboot
-  provider: Red Hat
   language: Java
+  provider: Red Hat
   supportUrl: https://github.com/devfile-samples/devfile-support#support-information
-
 parent:
   id: java-springboot
   registryUrl: 'https://registry.devfile.io'
   version: 1.2.0
-
 components:
-
   - name: image-build
     image:
-      imageName: tektutor-spring-microservice:latest
+      imageName: java-springboot-image:latest
       dockerfile:
         uri: Dockerfile
         buildContext: .
         rootRequired: false
-
-  - name: deploy-mariadb
+  - name: kubernetes-deploy
+    attributes:
+      deployment/replicas: 1
+      deployment/cpuRequest: 10m
+      deployment/memoryRequest: 180Mi
+      deployment/container-port: 8080
     kubernetes:
-      uri: ./deploy-mariadb.yml
-
-  - name: deploy-microservice 
+      uri: deploy-mariadb.yml
     kubernetes:
-      uri: ./deploy-hello-microservice.yml
+      uri: deploy-hello-microservice.yml
       endpoints:
-        - name: http-8081
-          targetPort: 8081
+        - name: http-8080
+          targetPort: 8080
           path: /
           secure: true
-  
 commands:
-
-  - id: build
+  - id: build-image
     apply:
       component: image-build
-
-  - id: backend
+  - id: deployk8s
     apply:
-      component: deploy-mariadb
-
-  - id: frontend 
-    apply:
-      component: deploy-microservice 
-
+      component: kubernetes-deploy
   - id: deploy
     composite:
       commands:
-        - build
-        - backend
-        - frontend
+        - build-image
+        - deployk8s
       group:
         kind: deploy
         isDefault: true
