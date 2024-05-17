@@ -47,7 +47,6 @@ commands:
   - id: deployk8s
     apply:
       component: kubernetes-mariadb-deploy
-    apply:
       component: kubernetes-helloms-deploy
   - id: deploy
     composite:
