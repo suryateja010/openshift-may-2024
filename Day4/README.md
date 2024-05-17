@@ -38,6 +38,8 @@ oc new-app --name=redis -e REDIS_PASSWORD=pass@123 bitnami/redis:latest --dry-ru
 cd ~/openshift-may-2024
 git pull
 cd Day4/redis
+oc apply -f redis-pv.yml
+oc apply -f redis-pvc.yml
 oc apply -f deploy.redis.yml
 oc apply -f deploy-route.yml
 
