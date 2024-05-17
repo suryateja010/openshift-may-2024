@@ -19,10 +19,15 @@ components:
         uri: Dockerfile
         buildContext: .
         rootRequired: false
+
   - name: kubernetes-deploy
     kubernetes:
       uri: deploy.yaml
       endpoints:
+        - name: http-3306
+          targetPort: 3306
+          path: /
+          secure: false
         - name: http-8080
           targetPort: 8080
           path: /
@@ -31,14 +36,14 @@ commands:
   - id: build-image
     apply:
       component: image-build
-  - id: deployk8s
+  - id: deploy
     apply:
       component: kubernetes-deploy
   - id: deploy
     composite:
       commands:
         - build-image
-        - deployk8s
+        - deploy
       group:
         kind: deploy
         isDefault: true
