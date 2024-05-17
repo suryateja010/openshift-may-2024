@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-pvc-jegan  # Replace 'jegan' with your name
+  name: wordpress-pvc-{{.Values.pvLabel}}  # Replace 'jegan' with your name
 spec:
   selector:
     matchLabels:
-      name: jegan # Replace 'jegan' with your name
+      name: {{.Values.pvLabel}} 
       tier: fe
   accessModes:
   - ReadWriteOnce
