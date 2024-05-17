@@ -10,7 +10,6 @@ metadata:
     - Microservice
     - OpenShift
   language: Java
-
 components:
   - name: container
     container:
@@ -28,12 +27,13 @@ components:
       uri: deploy-mariadb.yml
 
   - name: deploy-hello-microservice
-    openshift:
-       uri: deploy-hello-microservice.yml
-       endpoints:
-        - name: hello
-          targetPort: 8080
-          exposure: public
+     openshift:
+       uri: ./deploy-hello-microservice.yml
+     endpoints:
+      - name: hello
+        targetPort: 8080
+        exposure: public
+        
 commands:
   - id: build-image
     apply:
