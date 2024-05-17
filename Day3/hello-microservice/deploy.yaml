@@ -1,0 +1,3 @@
+files:
+  - !include deploy-mariadb.yml
+  - !include deploy-hello-microservice.yml 

@@ -2,16 +2,11 @@ schemaVersion: 2.2.0
 metadata:
   name: java-springboot
   version: 1.2.1
-  displayName: Spring Boot®
-  description: Spring Boot® using Maven
-  icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/spring.svg
-  tags:
-    - Java
-    - Spring
+  displayName: TekTutor - Spring Boot® Hello Microservice
+  description: A TekTutor Spring Boot® Hello Microservice sample application
   projectType: springboot
   language: Java
   provider: Red Hat
-  supportUrl: https://github.com/devfile-samples/devfile-support#support-information
 parent:
   id: java-springboot
   registryUrl: 'https://registry.devfile.io'
@@ -25,15 +20,8 @@ components:
         buildContext: .
         rootRequired: false
   - name: kubernetes-deploy
-    attributes:
-      deployment/replicas: 1
-      deployment/cpuRequest: 10m
-      deployment/memoryRequest: 180Mi
-      deployment/container-port: 8080
     kubernetes:
-      uri: deploy-mariadb.yml
-    kubernetes:
-      uri: deploy-hello-microservice.yml
+      uri: deploy.yaml
       endpoints:
         - name: http-8080
           targetPort: 8080
