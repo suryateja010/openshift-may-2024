@@ -22,6 +22,11 @@ components:
   - name: kubernetes-mariadb-deploy
     kubernetes:
       uri: deploy-mariadb.yml
+      endpoints:
+        - name: http-3306
+          targetPort: 3306
+          path: /
+          secure: false
   - name: kubernetes-helloms-deploy
     kubernetes:
       uri: deploy-hello-microservice.yml
