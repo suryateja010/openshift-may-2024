@@ -27,7 +27,7 @@ components:
   - name: deploy-microservice 
     openshift:
       uri: deploy-hello-microservice.yml
-    endpoints:
+      endpoints:
       - name: http-8080
         targetPort: 8080
         path: /
