@@ -27,10 +27,7 @@ components:
   - name: deploy-microservice 
     openshift:
       uri: deploy-hello-microservice.yml
-      endpoints:
-      - name: web
-        targetPort: 8080
-        exposure: public     
+  
 commands:
   - id: build-image
     apply:
