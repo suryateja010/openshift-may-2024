@@ -10,7 +10,14 @@ metadata:
     - Springboot
     - Microservice
     - OpenShift
+  projectType: springboot
+  provider: Red Hat
   language: Java
+
+parent:
+  id: java-springboot
+  registryUrl: 'https://registry.devfile.io'
+  version: 1.2.0
 
 components:
 
@@ -24,12 +31,17 @@ components:
         rootRequired: false
 
   - name: deploy-mariadb
-    kubernetes:
+    openshift:
       uri: deploy-mariadb.yml
 
   - name: deploy-microservice 
-    openshift:
+    kubernetes:
       uri: deploy-hello-microservice.yml
+      endpoints:
+        - name: http-8081
+          targetPort: 8081
+          path: /
+          secure: true
   
 commands:
 
