@@ -3,6 +3,8 @@ schemaVersion: 2.2.0
 metadata:
   name: java-springboot
   version: 1.2.1
+  attributes:
+    alpha.dockerimage-port: 8081  
   displayName: TekTutor - SpringBoot Hello Microservice  
   description: A TekTutor sample SpringBoot Hello Microservice 
   tags:
@@ -13,6 +15,7 @@ metadata:
   projectType: springboot
   provider: Red Hat
   language: Java
+  supportUrl: https://github.com/devfile-samples/devfile-support#support-information
 
 parent:
   id: java-springboot
