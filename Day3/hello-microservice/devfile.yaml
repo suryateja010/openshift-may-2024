@@ -20,19 +20,9 @@ components:
         buildContext: .
         rootRequired: false
   - name: kubernetes-mariadb-deploy
-    attributes:
-      deployment/replicas: 1
-      deployment/cpuRequest: 10m
-      deployment/memoryRequest: 180Mi
-      deployment/container-port: 3306
     kubernetes:
       uri: deploy-mariadb.yml
   - name: kubernetes-helloms-deploy
-    attributes:
-      deployment/replicas: 1
-      deployment/cpuRequest: 10m
-      deployment/memoryRequest: 180Mi
-      deployment/container-port: 8080
     kubernetes:
       uri: deploy-hello-microservice.yml
       endpoints:
