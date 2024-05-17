@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mariadb-configuration 
-data:
-  jdbc_url: "jdbc:mysql://mariadb:3306/tektutor"
