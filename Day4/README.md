@@ -40,6 +40,12 @@ git pull
 cd Day4/redis
 oc apply -f deploy.redis.yml
 oc apply -f deploy-route.yml
+
+oc rsh deploy/redis
+
+redis-cli -h localhost -p 6379 -a pass@123
+set msg 'Hello Redis'
+get msg
 ```
 
 Expected output
