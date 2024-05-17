@@ -20,7 +20,7 @@ git pull
 cd Day4/helm
 helm create wordpress-chart
 rm -rf wordpress-char/templates/*
-cp yaml-file/* wordpress-chart/templates
+cp yaml-files/* wordpress-chart/templates
 ls -l
 helm package wordpress-chart
 helm install wordpress wordpress-chart-0.1.0.tgz
