@@ -22,7 +22,7 @@ components:
 
   - name: deploy-mariadb
     kubernetes:
-      url: deploy-mariadb.yml
+      uri: deploy-mariadb.yml
 
   - name: deploy-microservice 
     openshift:
