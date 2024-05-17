@@ -16,9 +16,8 @@ spec:
         app: hello 
     spec:
       containers:
-        - image: tektutor-spring-microservice:latest 
+      - image: tektutor-spring-microservice:latest 
         name: hello 
-
         env:
         - name: USERNAME 
           valueFrom: 
