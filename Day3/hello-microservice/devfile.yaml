@@ -20,9 +20,13 @@ components:
         buildContext: .
         rootRequired: false
 
-  - name: k8s-deploy 
+  - name: deploy-mariadb
+    kubernetes:
+      url: deploy-mariadb.yml
+
+  - name: deploy-microservice 
     openshift:
-      uri: deploy.yaml
+      uri: deploy-hello-microservice.yml
       endpoints:
       - name: hello
         targetPort: 8080
@@ -32,13 +36,17 @@ commands:
   - id: build-image
     apply:
       component: image-build
+  - id: mariadb
+    apply:
+      component: deploy-mariadb
   - id: hello 
     apply:
-      component: k8s-deploy 
+      component: deploy-microservice 
   - id: deploy
     composite:
       commands:
         - build-image
+        - mariadb
         - hello
       group:
         kind: deploy
