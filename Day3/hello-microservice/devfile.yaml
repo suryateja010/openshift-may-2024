@@ -19,7 +19,7 @@ components:
         uri: Dockerfile
         buildContext: .
         rootRequired: false
-  - name: kubernetes-deploy
+  - name: kubernetes-mariadb-deploy
     attributes:
       deployment/replicas: 1
       deployment/cpuRequest: 10m
@@ -27,6 +27,13 @@ components:
       deployment/container-port: 8080
     kubernetes:
       uri: deploy-mariadb.yml
+  - name: kubernetes-helloms-deploy
+    attributes:
+      deployment/replicas: 1
+      deployment/cpuRequest: 10m
+      deployment/memoryRequest: 180Mi
+      deployment/container-port: 8080
+    kubernetes:
       uri: deploy-hello-microservice.yml
       endpoints:
         - name: http-8080
@@ -39,7 +46,9 @@ commands:
       component: image-build
   - id: deployk8s
     apply:
-      component: kubernetes-deploy
+      component: kubernetes-mariadb-deploy
+    apply:
+      component: kubernetes-helloms-deploy
   - id: deploy
     composite:
       commands:
