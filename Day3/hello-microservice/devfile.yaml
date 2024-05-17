@@ -34,11 +34,11 @@ components:
 
   - name: deploy-mariadb
     kubernetes:
-      uri: deploy-mariadb.yml
+      uri: ./deploy-mariadb.yml
 
   - name: deploy-microservice 
     kubernetes:
-      uri: deploy-hello-microservice.yml
+      uri: ./deploy-hello-microservice.yml
       endpoints:
         - name: http-8081
           targetPort: 8081
