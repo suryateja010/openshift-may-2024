@@ -11,11 +11,11 @@ metadata:
     - OpenShift
   language: Java
 components:
-  - name: container
+  - name: pull-image
     container:
       image: registry.access.redhat.com/ubi8/openjdk-11  
       command: ['sleep', 'infinity']
-
+      
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
