@@ -47,4 +47,11 @@
 - Scaling is easier on demand
 - high availability (HA)
   
-## KNative and Red Hat Serverless Architecture
+## Knative and Red Hat Serverless 
+
+- Red Hat Serverless is based on Knative project
+- Knative provides a serverless application layer on top of OpenShift/Kubernetes
+- Knative consists of 3 building blocks
+  1. Build
+  2. Eventing
+  3. Serving
