@@ -42,6 +42,8 @@
 - As there is no servers to manage, no need to worry about Infrastructure management activities like
   - security updates
   - montoring
+  - hardware maintenance
+  - hardware upgradation, etc.,
 - Scaling is easier on demand
 - high availability (HA)
   
