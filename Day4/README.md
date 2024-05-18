@@ -345,3 +345,9 @@ route.route.openshift.io/nginx created
 NAME    HOST/PORT                                        PATH   SERVICES   PORT    TERMINATION   WILDCARD
 nginx   nginx-jegan-devops.apps.ocp4.tektutor.org.labs   nginx      <all>   edge          None
 </pre>
+
+## Info - About Flannel Pod Networking in Kubernetes/OpenShift
+<pre>
+https://github.com/mvallim/kubernetes-under-the-hood/blob/master/documentation/kube-flannel.md  
+</pre>
+
