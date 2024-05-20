@@ -29,7 +29,7 @@ spec:
   - ReadWriteOnce # All Pods from the same node can access this Persistent volume(PV)
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: 192.168.1.108 # Replace this to 10.10.15.101, 10.10.15.102, 10.10.15.103 depending on which server you are connected to
+    server: 192.168.1.104 # Replace this to 10.10.15.101, 10.10.15.102, 10.10.15.103 depending on which server you are connected to
     path: /var/nfs/jegan/mariadb  # Replace with /var/nfs/user01/mariadb if you are connecting as user01
 ---
 apiVersion: v1
