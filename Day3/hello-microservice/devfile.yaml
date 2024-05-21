@@ -1,4 +1,4 @@
-schemaVersion: 2.2.0
+schemaVersion: 2.2.2
 metadata:
   name: TekTutor java-springboot microservice
   version: 1.2.1
@@ -9,7 +9,7 @@ metadata:
   provider: Red Hat
 parent:
   id: java-springboot
-  registryUrl: 'https://registry.devfile.io'
+  registryUrl: "https://registry.devfile.io"
   version: 1.2.0
 components:
   - name: image-build
@@ -21,29 +21,5 @@ components:
         rootRequired: false
 
   - name: kubernetes-deploy
-    openshift:
-      uri: ./deploy.yaml
-      endpoints:
-      - name: web
-        targetPort: 8080
-        exposure: public
-      - name: db
-        targetPort: 3306
-        exposure: none
-commands:
-  - id: build-image
-    apply:
-      component: image-build
-
-  - id: k8s-deploy
-    apply:
-      component: kubernetes-deploy
-
-  - id: deploy
-    composite:
-      commands:
-        - build-image
-        - k8s-deploy
-      group:
-        kind: deploy
-        isDefault: true
+    kubernetes:
+      uri: deploy.yaml
