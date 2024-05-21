@@ -266,8 +266,6 @@ jegan@tektutor.org $ ~/openshift-may-2024/Day5/ingress   main ●  curl
 Greetings from Spring Boot!	
 ```
 
-
-
 ## What does Serverless mean?
 - serverless does not mean the absence of servers
 - is an architecture model for running applications in an environment that is abstracted away from the developers
@@ -331,6 +329,45 @@ kn service create hello \
 --image ghcr.io/knative/helloworld-go:latest \
 --port 8080
 --env TARGET=World
+```
+
+Expected output
+<pre>
+	
+</pre>
+
+Accessing the knative application
+```
+curl -k https://hello-jegan.apps.ocp4.tektutor.org.labs
+```
+
+Update the service
+```
+kn service update hello --env TARGET=Knative
+kn revisions list
+```
+
+Expected output
+<pre>
+	
+</pre>
+
+Splitting the traffic between two revisions
+```
+kn service update hello --traffic hello-00001=50 --traffic @latest=50
+kn revisions list
+```
+
+Expected output
+<pre>
+	
+</pre>
+
+Deleting the knative service
+```
+kn service list
+kn service delete hello
+kn service list
 ```
 
 Expected output
