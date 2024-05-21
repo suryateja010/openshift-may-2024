@@ -11,7 +11,7 @@ spec:
     contextDir: "Day5/ImageStreamAndBuildConfig"
     type: Git
     git:
-      uri: 'https://github.com/tektutor/openshift-march-2024.git'
+      uri: 'https://github.com/tektutor/openshift-may-2024.git'
   strategy:
     type: Docker
   output:
