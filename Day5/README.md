@@ -371,3 +371,22 @@ kn service list
 
 Expected output
 ![knative](knative6.png)
+
+## Lab - Knative eventing
+
+Let's deploy a sink service
+```
+oc project jegan
+kn service create eventinghello --concurrency-target=1 --image=quay.io/rhdevelopers/eventinghello:0.0.2
+```
+
+Expected output
+![knative](knative7.png)
+
+Let's create an event source application
+```
+kn source ping create eventinhello-ping-source --schedule="*/2 * * * *" --data '{"message": "Thanks for your message"}' --sink ksvc:eventinghello
+```
+
+Expected output
+![knative](knative8.png)
