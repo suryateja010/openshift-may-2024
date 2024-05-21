@@ -176,6 +176,21 @@ Select "pipeline" project
 ![jenkins](jenkins14.png)
 ![jenkins](jenkins15.png)
 
+## Lab - Ingress
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/ingress
+
+oc new-app --name=nginx bitnami/ngin
+oc expose service/nginx
+
+oc new-app --name=hello tektutor/spring-ms:1.0
+oc expose service/hello
+```
+
+
+
 
 ## What does Serverless mean?
 - serverless does not mean the absence of servers
