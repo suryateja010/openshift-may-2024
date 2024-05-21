@@ -162,6 +162,8 @@ Deploy Jenkins Ephemeral from Develop context and login to Jenkins
 ![jenkins](jenkins2.png)
 ![jenkins](jenkins3.png)
 ![jenkins](jenkins4.png)
+
+Select "pipeline" project
 ![jenkins](jenkins5.png)
 ![jenkins](jenkins6.png)
 ![jenkins](jenkins7.png)
