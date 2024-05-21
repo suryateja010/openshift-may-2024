@@ -189,6 +189,82 @@ oc new-app --name=hello tektutor/spring-ms:1.0
 oc expose service/hello
 ```
 
+Find you openshift cluster base domain and update the ingress.yml accordingly
+```
+oc get ingresses.config/cluster -o jsonpath={.spec.domain}
+```
+Expected output
+<pre>
+apps.ocp4.tektutor.org.labs	
+</pre>
+
+
+Once you have updated the base url in the ingress.yml file, you may below
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/ingress
+
+oc apply -f ingress.yml
+
+oc get ingress
+oc describe ingress/tektutor
+
+curl http://tektutor.apps.ocp4.tektutor.org.labs/nginx
+curl http://tektutor.apps.ocp4.tektutor.org.labs/hello
+```
+
+Expected output
+```
+jegan@tektutor.org  ~/openshift-may-2024/Day5/ingress   main ●  oc get ingresses.config/cluster -o jsonpath={.spec.domain}
+apps.ocp4.tektutor.org.labs%                                                                                                           jegan@tektutor.org  ~/openshift-may-2024/Day5/ingress   main ●  vim ingress.yml 
+jegan@tektutor.org  ~/openshift-may-2024/Day5/ingress   main ●  oc apply -f ingress.yml 
+ingress.networking.k8s.io/tektutor created
+ jegan@tektutor.org $ ~/openshift-may-2024/Day5/ingress   main ●  oc get ingress
+NAME       CLASS    HOSTS                                  ADDRESS                                      PORTS   AGE
+tektutor   <none>   tektutor.apps.ocp4.tektutor.org.labs   router-default.apps.ocp4.tektutor.org.labs   80      7s
+jegan@tektutor.org $ ~/openshift-may-2024/Day5/ingress   main ●  oc describe ingress/tektutor
+Name:             tektutor
+Labels:           <none>
+Namespace:        jegan
+Address:          router-default.apps.ocp4.tektutor.org.labs
+Ingress Class:    <none>
+Default backend:  <default>
+Rules:
+  Host                                  Path  Backends
+  ----                                  ----  --------
+  tektutor.apps.ocp4.tektutor.org.labs  
+                                        /nginx   nginx:8080 (10.128.2.52:8080,10.130.0.31:8080,10.131.0.23:8080)
+                                        /hello   hello:8080 (10.128.0.163:8080,10.128.2.51:8080,10.131.0.24:8080)
+Annotations:                            haproxy.router.openshift.io/rewrite-target: /
+Events:                                 <none>
+ jegan@tektutor.org $ ~/openshift-may-2024/Day5/ingress   main ●  curl http://tektutor.apps.ocp4.tektutor.org.labs/nginx
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+jegan@tektutor.org $ ~/openshift-may-2024/Day5/ingress   main ●  curl http://tektutor.apps.ocp4.tektutor.org.labs/hello
+Greetings from Spring Boot!	
+```
 
 
 
