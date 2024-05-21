@@ -100,6 +100,20 @@ oc get deploy,svc,route
 curl http://hello-jegan.apps.ocp4.tektutor.org.labs
 ```
 
+## Lab - Build Custom Image from java springboot source from GitHub and push the custom image into JFrog Private Registroy cloud
+We need to create secret to store the JFrog Artifactory Private Image Registry login credentials in OpenShift
+```
+oc create secret docker-registry private-jfrog-image-registry --docker-server=openshiftjegan.jfrog.io --docker-username=your-registered-gmail --docker-password=your-frog-password
+```
+
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/BuildConfig
+
+
+```
+
 ## CI/CD
 
 You need to create a trial JFrog Artifactory (14-days Cloud Trial) @ https://jfrog.com/start-free/#trialOptions with your personal gmail account (No credit cards required)
@@ -113,6 +127,34 @@ You could choose AWS ( they use their cloud account hence no charges are applica
 
 Now you should be able to login to your jfrog cloud with your gmail account that your registered with JFrog trial
 ![JFrog](jfrog6.png)
+![JFrog](jfrog7.png)
+![JFrog](jfrog8.png)
+![JFrog](jfrog9.png)
+![JFrog](jfrog10.png)
+![JFrog](jfrog11.png)
+![JFrog](jfrog12.png)
+![JFrog](jfrog13.png)
+
+<pre>
+ jegan@tektutor.org  ~/openshift-may-2024/Day5   main  docker login -umail2tektutor@gmail.com openshiftjegan.jfrog.io
+Password: 
+WARNING! Your password will be stored unencrypted in /home/jegan/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+ jegan@tektutor.org  ~/openshift-may-2024/Day5   main  docker pull openshiftjegan.jfrog.io/jegan-docker/hello-world:latest
+latest: Pulling from jegan-docker/hello-world
+Digest: sha256:266b191e926f65542fa8daaec01a192c4d292bff79426f47300a046e1bc576fd
+Status: Downloaded newer image for openshiftjegan.jfrog.io/jegan-docker/hello-world:latest
+openshiftjegan.jfrog.io/jegan-docker/hello-world:latest
+ jegan@tektutor.org  ~/openshift-may-2024/Day5   main  docker tag openshiftjegan.jfrog.io/jegan-docker/hello-world openshiftjegan.jfrog.io/jegan-docker/hello-world:1.0.0
+ jegan@tektutor.org  ~/openshift-may-2024/Day5   main  docker push openshiftjegan.jfrog.io/jegan-docker/hello-world:1.0.0
+The push refers to repository [openshiftjegan.jfrog.io/jegan-docker/hello-world]
+ac28800ec8bb: Layer already exists 
+1.0.0: digest: sha256:d37ada95d47ad12224c205a938129df7a3e52345828b4fa27b03a98825d1e2e7 size: 524
+	
+</pre>
 
 ## What does Serverless mean?
 - serverless does not mean the absence of servers
