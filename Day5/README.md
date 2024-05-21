@@ -395,6 +395,42 @@ Expected output
 ![knative](knative11.png)
 ![knative](knative12.png)
 
+## Lab - Scheduling 
+
+Let's say our application involves loads of disk read/write, hence our application prefers nodes that has SSD disk.
+- Scheduler will search for nodes that has SSD disks, if the Scheduler is able to find nodes that has SSD disks then the Pods will be
+  deployed onto those nodes that has SSD disks
+- In case the scheduler is not able to find nodes has SSD disk, then it would still deploy the Pods on nodes that doesn't have SSD disks in case your affinitiy type is "Preferred"
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/scheduling
+oc apply -f nginx-deploy-with-preffered-node-affinity.yml
+oc get po
+oc get po -o wide
+```
+
+Expected output
+[Node Affinity](required.png)
+
+Let's delete the preferred Disk affinity scheduling
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/scheduling
+oc delete -f nginx-deploy-with-preffered-node-affinity.yml
+```
+
+Let's deploy the required Disk affinity scheduling
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/scheduling
+oc apply -f nginx-deploy-with-required-node-affinity.yml
+```
+Expected output
+![Node Affinity](required.png)
+
 
 ## Post-test - Kindly complete the test from RPS Lab machine
 <pre>
