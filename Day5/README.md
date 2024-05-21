@@ -1,5 +1,19 @@
 # Day 5
 
+## CI/CD
+
+You need to create a trial JFrog Artifactory (14-days Cloud Trial) @ https://jfrog.com/start-free/#trialOptions with your personal gmail account (No credit cards required)
+![JFrog](jfrog1.png)
+
+You could choose AWS ( they use their cloud account hence no charges are applicable to us - I didn't give my mobile number )
+![JFrog](jfrog2.png)
+![JFrog](jfrog3.png)
+![JFrog](jfrog4.png)
+![JFrog](jfrog5.png)
+
+Now you should be able to login to your jfrog cloud with your gmail account that your registered with JFrog trial
+![JFrog](jfrog6.png)
+
 ## What does Serverless mean?
 - serverless does not mean the absence of servers
 - is an architecture model for running applications in an environment that is abstracted away from the developers
