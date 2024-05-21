@@ -8,6 +8,7 @@ items:
   data:
     jdbc-url: "jdbc:mysql://mariadb:3306/tektutor"
     db_name: wordpress
+
 - apiVersion: v1
   kind: Secret
   metadata:
@@ -15,6 +16,7 @@ items:
   data:
     username: cm9vdA==
     password: cm9vdEAxMjM=
+
 - apiVersion: v1
   kind: PersistentVolume
   metadata:
@@ -31,6 +33,7 @@ items:
     nfs:
       server: 192.168.1.104 # Replace this to 10.10.15.101, 10.10.15.102, 10.10.15.103 depending on which server you are connected to
       path: /var/nfs/jegan/mariadb  # Replace with /var/nfs/user01/mariadb if you are connecting as user01
+
 - apiVersion: v1
   kind: PersistentVolumeClaim
   metadata:
@@ -45,6 +48,7 @@ items:
     resources:
       requests:
         storage: 100Mi
+
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
@@ -91,6 +95,7 @@ items:
           volumeMounts:
           - name: mariadb-storage
             mountPath: /bitnami/mariadb/data
+
 - apiVersion: v1
   kind: Service
   metadata:
@@ -104,6 +109,7 @@ items:
       targetPort: 3306
     selector:
       app: mariadb
+
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
@@ -145,6 +151,7 @@ items:
           volumeMounts:
           - name: mariadb-storage
             mountPath: /bitnami/mariadb/data
+
 - apiVersion: v1
   kind: Service
   metadata:
@@ -158,6 +165,7 @@ items:
       targetPort: 8080 
     selector:
       app: hello 
+
 - apiVersion: route.openshift.io/v1
   kind: Route
   metadata:

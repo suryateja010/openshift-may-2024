@@ -22,7 +22,7 @@ components:
 
   - name: kubernetes-deploy
     kubernetes:
-      uri: deploy.yaml
+      reference: deploy.yaml
       endpoints:
       - name: web
         targetPort: 8080
