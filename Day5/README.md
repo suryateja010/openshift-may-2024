@@ -323,3 +323,17 @@ Greetings from Spring Boot!
   1. Build
   2. Eventing
   3. Serving
+
+
+## Lab - Deploying a knative service
+```
+kn service create hello \
+--image ghcr.io/knative/helloworld-go:latest \
+--port 8080
+--env TARGET=World
+```
+
+Expected output
+<pre>
+	
+</pre>
