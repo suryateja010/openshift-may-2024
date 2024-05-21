@@ -174,6 +174,7 @@ Select "pipeline" project
 ![jenkins](jenkins12.png)
 ![jenkins](jenkins13.png)
 ![jenkins](jenkins14.png)
+![jenkins](jenkins15.png)
 
 
 ## What does Serverless mean?
