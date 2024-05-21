@@ -1,5 +1,28 @@
 # Day 5
 
+## Lab - Creating an Image Stream, build an image using BuildConfig and pushing the image to Image Stream
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/ImageStreamAndBuildConfig
+oc project jegan
+oc apply -f imagestream.yml
+oc get imagestreams
+oc get imagestream
+oc get is
+
+oc apply -f buildconfig.yml
+oc get buildconfigs
+oc get buildconfig
+oc get bc
+
+oc get builds
+oc get builds
+
+oc logs -f bc/spring-hello
+```
+
+
 ## CI/CD
 
 You need to create a trial JFrog Artifactory (14-days Cloud Trial) @ https://jfrog.com/start-free/#trialOptions with your personal gmail account (No credit cards required)
