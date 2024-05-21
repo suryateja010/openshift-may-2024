@@ -156,6 +156,9 @@ ac28800ec8bb: Layer already exists
 	
 </pre>
 
+Deploy Jenkins Ephemeral from Develop context and login to Jenkins
+![jenkins](jenkins1.png)
+
 ## What does Serverless mean?
 - serverless does not mean the absence of servers
 - is an architecture model for running applications in an environment that is abstracted away from the developers
