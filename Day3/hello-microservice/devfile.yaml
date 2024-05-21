@@ -1,32 +1,44 @@
 schemaVersion: 2.2.0
 metadata:
-  name: TekTutor java-springboot microservice
+  name: java-springboot
   version: 1.2.1
-  displayName: TekTutor - Spring Boot® Hello Microservice
-  description: A TekTutor Spring Boot® Hello Microservice sample application
-  projectType: springboot
-  language: Java
-  provider: Red Hat
+  attributes:
+    alpha.dockerimage-port: 8081
+  displayName: TekTutor - Spring Boot®
+  description: TekTutor - Spring Boot® using Maven
   icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/spring.svg
   tags:
     - Java
-    - Spring  
+    - Spring
+  projectType: springboot
+  language: Java
+  provider: Red Hat
   supportUrl: https://github.com/devfile-samples/devfile-support#support-information
 parent:
   id: java-springboot
-  registryUrl: "https://registry.devfile.io"
+  registryUrl: 'https://registry.devfile.io'
   version: 1.2.0
 components:
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
       dockerfile:
-        uri: Dockerfile
+        uri: ./Dockerfile
         buildContext: .
         rootRequired: false
   - name: kubernetes-deploy
+    attributes:
+      deployment/replicas: 1
+      deployment/cpuRequest: 10m
+      deployment/memoryRequest: 180Mi
+      deployment/container-port: 8081
     kubernetes:
       uri: ./deploy.yaml
+      endpoints:
+        - name: http-8081
+          targetPort: 8081
+          path: /
+          secure: true
 commands:
   - id: build-image
     apply:
