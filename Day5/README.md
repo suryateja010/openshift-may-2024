@@ -411,7 +411,7 @@ oc get po -o wide
 ```
 
 Expected output
-[Node Affinity](required.png)
+[Node Affinity](preferred.png)
 
 Let's delete the preferred Disk affinity scheduling
 ```
