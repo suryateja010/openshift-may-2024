@@ -21,8 +21,8 @@ components:
         rootRequired: false
 
   - name: kubernetes-deploy
-    kubernetes:
-      reference: deploy.yaml
+    openshift:
+      uri: ./deploy.yaml
       endpoints:
       - name: web
         targetPort: 8080
