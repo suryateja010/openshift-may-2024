@@ -158,6 +158,10 @@ ac28800ec8bb: Layer already exists
 
 Deploy Jenkins Ephemeral from Develop context and login to Jenkins
 ![jenkins](jenkins1.png)
+![jenkins](jenkins2.png)
+![jenkins](jenkins3.png)
+![jenkins](jenkins4.png)
+
 
 ## What does Serverless mean?
 - serverless does not mean the absence of servers
