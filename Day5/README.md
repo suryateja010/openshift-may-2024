@@ -84,6 +84,22 @@ Successfully pushed image-registry.openshift-image-registry.svc:5000/jegan/tektu
 Push successful  
 </pre>
 
+Let's deploy the application into openshift
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/ImageStreamAndBuildConfig
+oc project jegan
+
+oc apply -f hello-deploy.yml
+oc apply -f hello-svc.yml
+oc apply -f hello-route.yml
+
+oc get deploy,svc,route
+
+curl http://hello-jegan.apps.ocp4.tektutor.org.labs
+```
+
 ## CI/CD
 
 You need to create a trial JFrog Artifactory (14-days Cloud Trial) @ https://jfrog.com/start-free/#trialOptions with your personal gmail account (No credit cards required)
