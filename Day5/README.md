@@ -11,7 +11,8 @@ You could choose AWS ( they use their cloud account hence no charges are applica
 ![JFrog](jfrog4.png)
 ![JFrog](jfrog5.png)
 
-
+Now you should be able to login to your jfrog cloud with your gmail account that your registered with JFrog trial
+![JFrog](jfrog6.png)
 
 ## What does Serverless mean?
 - serverless does not mean the absence of servers
