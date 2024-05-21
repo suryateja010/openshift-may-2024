@@ -332,14 +332,16 @@ kn service create hello \
 ```
 
 Expected output
-<pre>
-	
-</pre>
+![knative](knative1.png)
 
 Accessing the knative application
 ```
 curl -k https://hello-jegan.apps.ocp4.tektutor.org.labs
 ```
+
+Expected output
+![knative](knative2.png)
+
 
 Update the service
 ```
@@ -348,9 +350,7 @@ kn revisions list
 ```
 
 Expected output
-<pre>
-	
-</pre>
+![knative](knative3.png)
 
 Splitting the traffic between two revisions
 ```
@@ -359,9 +359,8 @@ kn revisions list
 ```
 
 Expected output
-<pre>
-	
-</pre>
+![knative](knative4.png)
+![knative](knative5.png)
 
 Deleting the knative service
 ```
@@ -371,6 +370,4 @@ kn service list
 ```
 
 Expected output
-<pre>
-	
-</pre>
+![knative](knative6.png)
