@@ -390,3 +390,7 @@ kn source ping create eventinhello-ping-source --schedule="*/2 * * * *" --data '
 
 Expected output
 ![knative](knative8.png)
+![knative](knative9.png)
+![knative](knative10.png)
+![knative](knative11.png)
+![knative](knative12.png)
