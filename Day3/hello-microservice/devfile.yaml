@@ -7,14 +7,16 @@ metadata:
   projectType: springboot
   language: Java
   provider: Red Hat
-
+  icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/spring.svg
+  tags:
+    - Java
+    - Spring  
+  supportUrl: https://github.com/devfile-samples/devfile-support#support-information
 parent:
   id: java-springboot
   registryUrl: "https://registry.devfile.io"
   version: 1.2.0
-
 components:
-
   - name: image-build
     image:
       imageName: tektutor-spring-microservice:latest
@@ -22,11 +24,9 @@ components:
         uri: Dockerfile
         buildContext: .
         rootRequired: false
-
   - name: kubernetes-deploy
     kubernetes:
-      uri: deploy.yaml
-
+      uri: ./deploy.yaml
 commands:
   - id: build-image
     apply:
