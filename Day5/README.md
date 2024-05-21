@@ -100,6 +100,20 @@ oc get deploy,svc,route
 curl http://hello-jegan.apps.ocp4.tektutor.org.labs
 ```
 
+## Lab - Build Custom Image from java springboot source from GitHub and push the custom image into JFrog Private Registroy cloud
+We need to create secret to store the JFrog Artifactory Private Image Registry login credentials in OpenShift
+```
+oc create secret docker-registry private-jfrog-image-registry --docker-server=openshiftjegan.jfrog.io --docker-username=your-registered-gmail --docker-password=your-frog-password
+```
+
+```
+cd ~/openshift-may-2024
+git pull
+cd Day5/BuildConfig
+
+
+```
+
 ## CI/CD
 
 You need to create a trial JFrog Artifactory (14-days Cloud Trial) @ https://jfrog.com/start-free/#trialOptions with your personal gmail account (No credit cards required)
