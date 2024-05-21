@@ -5,7 +5,7 @@
 You need to create a trial JFrog Artifactory (14-days Cloud Trial) @ https://jfrog.com/start-free/#trialOptions with your personal gmail account (No credit cards required)
 ![JFrog](jfrog1.png)
 
-You could choose AWS ( they use their own cloud account so charges are applicable to us - I didn't give my mobile number )
+You could choose AWS ( they use their cloud account hence no charges are applicable to us - I didn't give my mobile number )
 ![JFrog](jfrog2.png)
 ![JFrog](jfrog3.png)
 ![JFrog](jfrog4.png)
