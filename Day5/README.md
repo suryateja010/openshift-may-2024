@@ -157,6 +157,7 @@ ac28800ec8bb: Layer already exists
 </pre>
 
 Deploy Jenkins Ephemeral from Develop context and login to Jenkins
+![jenkins](jenkins0.png)
 ![jenkins](jenkins1.png)
 ![jenkins](jenkins2.png)
 ![jenkins](jenkins3.png)
