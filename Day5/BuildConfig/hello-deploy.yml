@@ -15,7 +15,7 @@ spec:
         app: hello
     spec:
       containers:
-      - image: surya010.jfrog.io/surya-docker/hello-spring-microservice:2.0
+      - image: surya010.jfrog.io/surya010-docker/hello-spring-microservice:2.0
         name: hello-spring-microservice
       imagePullSecrets:
       - name: private-jfrog-image-registry
